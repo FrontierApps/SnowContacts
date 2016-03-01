@@ -6,7 +6,12 @@ class ContactsController < ApplicationController
     	@contact = Contact.find(params[:id])
     end
     def index
-        @contacts = Contact.all
+       
+        if params[:search]
+            @contacts = Contact.search(params[:search])
+        else
+            
+        end
     end
 
     def show
@@ -15,8 +20,7 @@ class ContactsController < ApplicationController
     
     def create
     	@contact = Contact.new(company_params)
-    	if @contact
-.save
+    	if @contact.save
     		redirect_to @contact
 
     	else
@@ -27,8 +31,7 @@ class ContactsController < ApplicationController
     def update
     	@contact = Contact.new(company_params)
 
-    	if @contact
-.save
+    	if @contact.save
     		redirect_to @contact
 
     	else 
@@ -45,7 +48,6 @@ class ContactsController < ApplicationController
     
     private
     def company_params
-    	params.require(:contact
-).permit(:contact)
+    	params.require(:contact).permit(:contact)
     end
 end

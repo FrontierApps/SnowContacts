@@ -1,0 +1,18 @@
+
+  <p>
+    <strong>Address:</strong>
+    <p><%= location.address%></p>
+
+    <p><%= location.address1 %></p>
+	<p><%= location.city%> <%=location.state %> <%=location.zip %></p>
+  </p>
+ 
+  <p>
+    <strong>phone:</strong>
+    <%= location.phone %>
+  </p>
+ <p>
+  <%= link_to 'Destroy Location', [location.company, location],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

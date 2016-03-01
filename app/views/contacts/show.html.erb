@@ -1,0 +1,9 @@
+<p>
+	<strong>Company:</strong>
+	<%=@contact.CompanyName %>
+	<%= link_to 'Edit', edit_contact_path(@contact) %>
+	<%= link_to 'Destroy', contact_path(@contact),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    

@@ -1,2 +1,15 @@
- <%= select_tag "contact", options_from_collection_for_select(@contacts,"id", "CompanyName"), id: "company_name" %>
-  
+
+<%= form_tag(contacts_path, :method => "get", id: "search-form") do %>
+
+<%= text_field_tag :search, params[:search], placeholder: "Search Companies" %>
+
+<%= submit_tag "Search" %>
+<% end %>
+ 
+<% if @contacts.present? %>
+  <%= render 'contacts/contacts' %>
+<% else %>
+  <p>There are no contacts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+
+   

@@ -1,0 +1,5 @@
+<%= @contacts.each do |contact| %>
+
+<p><%= link_to contact.CompanyName, contact_path(contact) %> </p>
+
+<% end %>
