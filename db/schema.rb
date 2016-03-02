@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160301185710) do
 
-  create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "FirstName",         limit: 50
     t.string   "LastName",          limit: 50
     t.string   "Dear",              limit: 50
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20160301185710) do
     t.string   "ContactsInterests"
     t.boolean  "Newsletter",                           default: false, null: false
     t.string   "Attn",              limit: 50
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

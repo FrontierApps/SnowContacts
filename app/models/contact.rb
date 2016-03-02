@@ -5,7 +5,7 @@ class Contact < ApplicationRecord
   default_scope {order('CompanyName ASC')}
   
 	def self.search(search)
-	  where("CompanyName LIKE ?", "%#{search}%") 
+	  where("id LIKE ?", "%#{search}%") 
 	  
 	end
 	

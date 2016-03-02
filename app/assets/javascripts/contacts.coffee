@@ -4,5 +4,5 @@
 
 
 $(document).ready ->
-  $('#company_name').select2 theme: 'bootstrap'
+  $('#search').select2 theme: 'bootstrap'
   return
