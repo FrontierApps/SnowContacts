@@ -1,5 +1,22 @@
-<%= @contacts.each do |contact| %>
-
-<p><%= link_to contact.CompanyName, contact_path(contact) %> </p>
-
-<% end %>
+<%= form_for @contact do |f|%>
+<% if @contact.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@contact.errors.count, "error") %> prohibited
+        this contact from being saved:
+      </h2>
+      <ul>
+        <% @contact.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+  <%= f.label :CompanyName %><br>
+  <%= f.text_field :CompanyName %>
+  </p>
+  <p>
+  <%= f.submit %>
+  </p>
+  <% end %>

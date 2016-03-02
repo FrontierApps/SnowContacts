@@ -6,11 +6,12 @@ class ContactsController < ApplicationController
     	@contact = Contact.find(params[:id])
     end
     def index
-        @contacts = Contact.all
+      @contacts = Contact.all
         if params[:search]
-            @contacts = Contact.search(params[:search])
+            @contact = Contact.find(params[:search])
+
         else
-            
+             
         end
     end
 
@@ -32,7 +33,7 @@ class ContactsController < ApplicationController
     	@contact = Contact.find(params[:id])
 
     	if @contact.update(contact_params)
-    		redirect_to @contact
+    		
 
     	else 
     		render 'edit'
