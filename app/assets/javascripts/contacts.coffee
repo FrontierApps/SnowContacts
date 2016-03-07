@@ -5,16 +5,8 @@
 
 $(document).ready ->
   $('#search').select2 theme: 'bootstrap'
+ # $('#search').select2().on 'change', (e) ->
+ #  @form.submit()
 
-  $("#search-form").on("ajax:success", (e, data, status, xhr) ->
-    $("#contact").replaceWith xhr.responseText
-  ).on "ajax:error", (e, xhr, status, error) ->
-    $("#contact").append "<p>ERROR</p>"
-    
-  $("#contact").on("ajax:success", (e, data, status, xhr) ->
-    $("#contact").replaceWith xhr.responseText
-  ).on "ajax:error", (e, xhr, status, error) ->
-    $("#contact").append "<p>ERROR</p>"
-
- 
+  
   return
