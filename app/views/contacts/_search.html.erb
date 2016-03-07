@@ -1,5 +1,4 @@
 <%= form_tag(contacts_path, :method => "get", id: "search-form", remote: true) do %>
 
-<%= select_tag "search", options_from_collection_for_select(@contacts,"id", "CompanyName", params[:search]), id: "search", include_blank: true%>
-<%= submit_tag("Search") %>
+<%= select_tag "search", options_from_collection_for_select(@contacts,"id", "CompanyName", params[:search]), id: "search", include_blank: true, :onchange => "$(this.form).submit();"%>
 <% end %>
