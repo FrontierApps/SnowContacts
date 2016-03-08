@@ -7,4 +7,13 @@
               data: { confirm: 'Are you sure?' } %>
     <h3>Locations</h3>
     <%= render @contact.locations %>
+    <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#location">
+  		Add a Location
+	</button>
+
+    <div id='location'  class="collapse out">
+    <h2>Add a location:</h2>
+		<%= render 'locations/form' %>
+	</div>
+
 </div>

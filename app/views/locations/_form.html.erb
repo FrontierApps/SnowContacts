@@ -1,16 +1,20 @@
-<%= form_for([@contact, @contact.locations.build]) do |f| %>
+<%= form_for([@contact, @contact.locations.build],remote: true ) do |f| %>
   <p>
-    <%= f.label :address %><br>
-    <p><%= f.text_field :address %></p>
-    <p><%= f.text_field :address1 %></p>
+    <%= f.label :locationName %><br>
+    <p><%= f.text_field :locationName %></p>
   </p>
   <p>
-  	<%= f.text_field :city ,:size=>20 %>
-  	<%= f.text_field :state ,:size=>2 %>
-  	<%= f.text_field :zip ,:size=>5%>
+    <%= f.label :Address %><br>
+    <p><%= f.text_field :Address %></p>
+    <p><%= f.text_field :Address1 %></p>
+  </p>
   <p>
-    <%= f.label :phone %><br>
-    <%= f.telephone_field(:phone) %>
+  	<%= f.text_field :City ,:size=>20 %>
+  	<%= f.text_field :StateOrProvince ,:size=>2 %>
+  	<%= f.text_field :PostalCode ,:size=>5%>
+  <p>
+    <%= f.label :WorkPhone %><br>
+    <%= f.telephone_field(:WorkPhone) %>
   </p>
   <p>
     <%= f.submit %>

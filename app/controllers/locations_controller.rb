@@ -1,9 +1,11 @@
 class LocationsController < ApplicationController
-	
+	 def new
+      @location = Location.new
+    end
 	def create
     @contact = Contact.find(params[:contact_id])
     @location = @contact.locations.create(location_params)
-    redirect_to company_path(@contact)
+    redirect_to contact_path(@contact)
 	end
  
   def destroy
@@ -15,7 +17,7 @@ class LocationsController < ApplicationController
  
   private
     def location_params
-      params.require(:location).permit(:address, :address1, :city, :state, :zip, :phone)
+      params.require(:location).permit(:locationName, :Address, :Address1, :City, :StateOrProvince, :PostalCode, :WorkPhone)
     end
 end
 
