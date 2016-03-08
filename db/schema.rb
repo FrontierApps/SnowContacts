@@ -56,8 +56,6 @@ ActiveRecord::Schema.define(version: 20160301185710) do
     t.string   "City",            limit: 50
     t.string   "StateOrProvince", limit: 20
     t.string   "PostalCode",      limit: 20
-    t.string   "Country",         limit: 50
-    t.string   "Title",           limit: 50
     t.string   "WorkPhone",       limit: 30
     t.string   "FaxNumber",       limit: 30
     t.boolean  "is_primary"
