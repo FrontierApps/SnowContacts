@@ -5,7 +5,8 @@ class LocationsController < ApplicationController
 	def create
     @contact = Contact.find(params[:contact_id])
     @location = @contact.locations.create(location_params)
-    redirect_to contact_path(@contact)
+    flash[:notice] = "Location was successfully created." if @location.save
+    respond_with(@contact)
 	end
  
   def destroy
