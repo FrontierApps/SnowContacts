@@ -1,6 +1,8 @@
 <div id='contact'>
 	
-	<h1><%=@contact.CompanyName %></h1>
+  <h1><%=@contact.CompanyName %></h1>
+  <h1><%=@location.FirstName %></h1>
+
 	<%= link_to 'Edit', edit_contact_path(@contact), remote: true%>
 	<%= link_to 'Destroy', contact_path(@contact),
               method: :delete,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301185710) do
+ActiveRecord::Schema.define(version: 20160314003853) do
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "FirstName",         limit: 50
@@ -66,5 +66,17 @@ ActiveRecord::Schema.define(version: 20160301185710) do
 
   add_index "locations", ["contact_id"], name: "index_locations_on_contact_id", using: :btree
 
-  add_foreign_key "locations", "contacts"
+  create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "location_id"
+    t.string   "FirstName",   limit: 50
+    t.string   "LastName",    limit: 50
+    t.string   "Title",       limit: 50
+    t.string   "MobilePhone", limit: 30
+    t.string   "EmailName",   limit: 50
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "people", ["location_id"], name: "index_people_on_location_id", using: :btree
+
 end

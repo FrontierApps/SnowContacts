@@ -1,0 +1,22 @@
+<%= form_for([@contact, @contact.locations.build],remote: true ) do |f| %>
+  <p>
+    <%= f.label :locationName %><br>
+    <p><%= f.text_field :locationName %></p>
+  </p>
+  <p>
+    <%= f.label :Address %><br>
+    <p><%= f.text_field :Address %></p>
+    <p><%= f.text_field :Address1 %></p>
+  </p>
+  <p>
+  	<%= f.text_field :City ,:size=>20 %>
+  	<%= f.text_field :StateOrProvince ,:size=>2 %>
+  	<%= f.text_field :PostalCode ,:size=>5%>
+  <p>
+    <%= f.label :WorkPhone %><br>
+    <%= f.telephone_field(:WorkPhone) %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
