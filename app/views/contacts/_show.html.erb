@@ -1,14 +1,14 @@
 <div id='contact'>
 	
   <h1><%=@contact.CompanyName %></h1>
-  <h1><%=@location.FirstName %></h1>
-
+  
 	<%= link_to 'Edit', edit_contact_path(@contact), remote: true%>
 	<%= link_to 'Destroy', contact_path(@contact),
               method: :delete,
               data: { confirm: 'Are you sure?' } %>
     <h3>Locations</h3>
     <%= render @contact.locations %>
+    
     <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#location">
   		Add a Location
 	</button>

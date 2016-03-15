@@ -1,6 +1,7 @@
-
-  <div>
-    <strong>Name:</strong>
-    <p><%= person.FirstName%> <%=person.LastName%></p>
-
-</div>
+  <% @people.each do |person| %>
+    <div>
+    	<strong>Name:</strong>
+	    <p><%= person.FirstName%> <%=person.LastName%></p>
+	</div>
+  <% end %>
+  

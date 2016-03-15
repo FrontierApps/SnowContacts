@@ -2,6 +2,9 @@ class LocationsController < ApplicationController
 	 def new
       @location = Location.new
     end
+   def index
+      @location = Location.matchesContact(@contact.id)
+   end
 	def create
     @contact = Contact.find(params[:contact_id])
     @location = @contact.locations.create(location_params)

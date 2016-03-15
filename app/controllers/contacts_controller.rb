@@ -9,9 +9,7 @@ class ContactsController < ApplicationController
     def show
         @contacts = Contact.all
         @contact = Contact.find(params[:id])
-        @location = Location.matchesContact(@contact.id)
-
-        respond_to do |format|
+            respond_to do |format|
                 format.js {render "show"}
                 format.html
             end
@@ -20,7 +18,8 @@ class ContactsController < ApplicationController
       @contacts = Contact.all
         if params[:search]
             @contact = Contact.find(params[:search])
-                respond_to do |format|
+         
+            respond_to do |format|
                 format.js { render "show" }
             end
         else

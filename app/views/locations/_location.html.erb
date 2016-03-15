@@ -1,9 +1,8 @@
-
+   <%= @people = Person.matchesLocation(location.id)%>
   <div>
-  <%= render @contact.people %>
+    <%= render 'people/person' %>
     <strong>Address:</strong>
     <p><%= location.Address%></p>
-
     <p><%= location.Address1 %></p>
 	<p><%= location.City%> <%=location.StateOrProvince %> <%=location.PostalCode %></p>
   </p>
