@@ -1,0 +1,1 @@
+insert into locations (locationName, Address, Address1, City, StateOrProvince,PostalCode, WorkPhone,FaxNumber) Select id, Address, Address1, City, StateOrProvince,PostalCode, WorkPhone,FaxNumber FROM contacts;

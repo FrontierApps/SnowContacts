@@ -1,6 +1,6 @@
 class Contact < ApplicationRecord
-	has_many :locations, dependent: :destroy
-	has_many :people, through: :locations
+	has_many :people
+	has_many :locations, through: :people
 	
   default_scope {order('CompanyName ASC')}
   

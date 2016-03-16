@@ -1,6 +1,5 @@
-   <%= @people = Person.matchesLocation(location.id)%>
   <div>
-    <%= render 'people/person' %>
+    <%= render @contact.people %>
     <strong>Address:</strong>
     <p><%= location.Address%></p>
     <p><%= location.Address1 %></p>
@@ -12,7 +11,5 @@
     <%= location.WorkPhone %>
   </p>
  <p>
-  <%= link_to 'Remove Location', [location.contact, location],
-               method: :delete,
-               data: { confirm: 'Are you sure?' } %>
+  
 </div>
