@@ -1,6 +1,5 @@
 class Contact < ApplicationRecord
-	has_many :people
-	has_many :locations, through: :people
+	has_many :locations
 		
   default_scope {order('CompanyName ASC')}
   

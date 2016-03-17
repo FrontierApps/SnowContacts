@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160314003853) do
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "contact_id"
     t.string   "locationName"
     t.string   "Address"
     t.string   "Address1",        limit: 50
@@ -63,8 +64,9 @@ ActiveRecord::Schema.define(version: 20160314003853) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "locations", ["contact_id"], name: "index_locations_on_contact_id", using: :btree
+
   create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "contact_id"
     t.integer  "location_id"
     t.string   "FirstName",   limit: 50
     t.string   "LastName",    limit: 50
@@ -75,7 +77,6 @@ ActiveRecord::Schema.define(version: 20160314003853) do
     t.datetime "updated_at",             null: false
   end
 
-  add_index "people", ["contact_id"], name: "index_people_on_contact_id", using: :btree
   add_index "people", ["location_id"], name: "index_people_on_location_id", using: :btree
 
 end

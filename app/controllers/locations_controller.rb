@@ -2,10 +2,34 @@ class LocationsController < ApplicationController
 	 def new
       @location = Location.new
     end
-   def index
-      @location = Location.matchesContact(@contact.id)
-   end
-	def create
+  def index
+      @contacts = Contact.all
+        if params[:search]
+
+            @contact = Contact.find(params[:search])
+            @locations = Location.joins(:people).matchesContact(params[:search])
+            respond_to do |format|
+               format.html { render "show" }
+               format.js { render "show" }
+            end
+        else
+
+        end
+
+  end
+
+  def show
+      @contact = Contact.find(params[:id])
+      @location = Location.matchesContact(params[:id])
+         
+        respond_to do |format|
+           format.html { render "show" }
+           format.js { render "show" }
+        end
+
+  end
+	
+  def create
     @contact = Contact.find(params[:contact_id])
     @location = @contact.locations.create(location_params)
     flash[:notice] = "Location was successfully created." if @location.save

@@ -6,26 +6,10 @@ class ContactsController < ApplicationController
     def edit
     	@contact = Contact.find(params[:id])
     end
-    def show
-        @contacts = Contact.all
-        @contact = Contact.find(params[:id])
-            respond_to do |format|
-                format.js {render "show"}
-                format.html
-            end
-    end
+    
     def index
       @contacts = Contact.all
-        if params[:search]
-            @contact = Contact.find(params[:search])
-         
-            respond_to do |format|
-                format.js { render "show" }
-            end
-        else
-
-        end
-
+        
     end
         
     def create
