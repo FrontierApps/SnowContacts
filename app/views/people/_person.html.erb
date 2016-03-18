@@ -1,7 +1,9 @@
   
     <div>
        	<strong>Name:</strong>
-	    <p><%= person.FirstName%> <%=person.LastName%></p>
+	    <% location.people.each do |person| %>
+  			<%= person.FirstName %>
+		<% end %>
 	</div>
 
   

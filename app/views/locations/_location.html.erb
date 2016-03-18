@@ -1,5 +1,8 @@
   <div>
-    <%= render @location.people %>
+        <strong>Name:</strong>
+        <% location.people.each do |person| %>
+        <%= person.FirstName %>
+        <% end %>
       
 
     <strong>Address:</strong>

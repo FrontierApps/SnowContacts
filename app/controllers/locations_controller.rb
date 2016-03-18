@@ -7,7 +7,7 @@ class LocationsController < ApplicationController
         if params[:search]
 
             @contact = Contact.find(params[:search])
-            @locations = Location.joins(:people).matchesContact(params[:search])
+            @locations = Location.matchesContact(params[:search])
             respond_to do |format|
                format.html { render "show" }
                format.js { render "show" }
