@@ -16,7 +16,7 @@
 			 <%= form_tag(locations_path, :method => "get", id: "search-form",  class: "navbar-form navbar-left", remote: true) do %>
        <div class="form-group">
 
-				<%= select_tag "search", options_from_collection_for_select(@contacts,"id", "CompanyName", params[:search]), id: "search", include_blank: true, :onchange => "$(this.form).submit();"%>
+				<%= select_tag "id", options_from_collection_for_select($contacts,"id", "CompanyName", params[:search]), id: "search", include_blank: true, :onchange => "$(this.form).submit();"%>
         </div>
 			<% end %>
 		    </div>

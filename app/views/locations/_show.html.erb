@@ -1,21 +1,30 @@
 <div id='contact'>
 	
-  <h1><%=@contact.CompanyName %></h1>
-  
-	<%= link_to 'Edit', edit_contact_path(@contact), remote: true%>
-	<%= link_to 'Destroy', contact_path(@contact),
+  <h1><%=@contact.CompanyName %>
+
+ <small>  
+  <%= link_to edit_contact_path(@contact), remote: true do%>
+  <span class="glyphicon glyphicon-pencil"></span>
+  <%end%>
+	<%= link_to contact_path(@contact),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-    <h3>Locations</h3>
+              data: { confirm: 'Are you sure?' } do%>
+  <span class="glyphicon glyphicon-remove"></span>
+  <%end%>
+  </small>
+  </h1>
+  <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#location">
+      Add a Location
+  </button>
+  <div id='location'  class="collapse out">
+    <h2>Add a location:</h2>
+    <%= render 'locations/form' %>
+  </div>
+  
     <%= render @locations%>
     
-    <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#location">
-  		Add a Location
-	</button>
+    
 
-    <div id='location'  class="collapse out">
-    <h2>Add a location:</h2>
-		<%= render 'locations/form' %>
-	</div>
+    
 
 </div>
