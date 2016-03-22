@@ -1,3 +1,12 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="form">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">New Location</h4>
+      </div>
+      <div class="modal-body">
+
 <%= form_for @location, remote: true do |f| %>
   <p>
     <%= f.label :locationName %><br>
@@ -21,6 +30,16 @@
     <%= f.telephone_field(:FaxNumber) %>
   </p>
   <p>
-    <%= f.submit %>
+  <label for="location[is_primary]">Is this the main location?</label>
+  
+  <%= f.check_box :is_primary, {:class => "myclass", :style => "mystyle"}, "checked-value", "unchecked-value" %>
   </p>
-<% end %>
+
+<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit ({ :class => 'btn btn-primary' })%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

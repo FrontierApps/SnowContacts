@@ -13,18 +13,17 @@
   <%end%>
   </small>
   </h1>
-  <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#location">
+
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <%= render @locations%>
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
       Add a Location
   </button>
-  <div id='location'  class="collapse out">
-    <h2>Add a location:</h2>
-    <%= render 'locations/form' %>
-  </div>
-  
-    <%= render @locations%>
-    
-    
+    <%= render 'locations/form' %>    
 
-    
+ </div>   
 
-</div>
