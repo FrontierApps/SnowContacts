@@ -35,7 +35,7 @@ class ContactsController < ApplicationController
                 format.js { render "show" }
             end
     	else
-    		render 'new'
+    		
     	end
     end
 

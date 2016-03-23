@@ -1,4 +1,6 @@
+$('#myContactForm').modal('hide');
 $('.modal-backdrop').remove();
+$("body").removeClass("modal-open");
 $('#contact').replaceWith('<%= j render('show') %>');
 
 
