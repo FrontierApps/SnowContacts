@@ -6,12 +6,12 @@ class LocationsController < ApplicationController
       @contact = Contact.find(params[:id])
       @locations = Location.matchesContact(params[:id])
       @location = Location.new
-      respond_to do |format|
-        format.html { render "show" }
-        format.js { render "show" }
-      end
+        respond_to do |format|
+          format.html { render "show" }
+          format.js { render "show" }
+        end
      
-      else
+    else
     end
   end
   def show
@@ -19,10 +19,10 @@ class LocationsController < ApplicationController
     @locations = Location.matchesContact(params[:id])
     @contact = Contact.find(params[:id])
     @location = Location.new
-    respond_to do |format|
-      format.html { render "show" }
-      format.js { render "show" }
-    end
+      respond_to do |format|
+        format.html { render "show" }
+        format.js { render "show" }
+      end
   end
   def new
     @location = Location.new
@@ -44,8 +44,10 @@ class LocationsController < ApplicationController
   def create
     @contact = Contact.find(params[:contact_id])
     @location = @contact.locations.create(location_params)
-    flash[:notice] = "Location was successfully created." if @location.save
-    respond_with(@contact)
+    flash[:notice] = "Location was successfully created." 
+     if @location.save
+      respond_with(@contact)
+     end
 	end
   def destroy
     @contact = Contact.find(params[:contact_id])

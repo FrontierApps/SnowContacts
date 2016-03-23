@@ -10,7 +10,7 @@ class CreateLocations < ActiveRecord::Migration[5.0]
      t.string    "PostalCode",        limit: 20
      t.string    "WorkPhone",         limit: 30
      t.string    "FaxNumber",         limit: 30
-     t.boolean :is_primary
+     t.string    "notes"
      t.timestamps
     end
   end

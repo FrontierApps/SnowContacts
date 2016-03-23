@@ -6,8 +6,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">New Location</h4>
       </div>
       <div class="modal-body">
-
-<%= form_for @location, remote: true do |f| %>
+<%= form_for([@contact, @contact.locations.build]) do |f| %>
   <p>
     <%= f.label :locationName %><br>
     <p><%= f.text_field :locationName %></p>
@@ -29,12 +28,7 @@
     <%= f.label :FaxNumber %><br>
     <%= f.telephone_field(:FaxNumber) %>
   </p>
-  <p>
-  <label for="location[is_primary]">Is this the main location?</label>
   
-  <%= f.check_box :is_primary, {:class => "myclass", :style => "mystyle"}, "checked-value", "unchecked-value" %>
-  </p>
-
 <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <%= f.submit ({ :class => 'btn btn-primary' })%>

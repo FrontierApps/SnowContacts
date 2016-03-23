@@ -1,38 +1,25 @@
 <div class="thumbnail">
   <h2> <%=location.locationName%>
-  <small>
-  <%= link_to edit_location_path(location.id), remote: true do%>
-  <span class="glyphicon glyphicon-pencil"></span>
-  <% end %>
-  <%= link_to location_path(@locations),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } do%>
-  <span class="glyphicon glyphicon-remove"></span>
-  <% end %>
-  
-  </small>
+    <small>
+      <%= link_to edit_contact_path(@contact), remote: true do%>
+        <span class="glyphicon glyphicon-pencil"></span>
+      <%end%>
+      <%= link_to [location.contact, location],
+          method: :delete,
+          data: { confirm: 'Are you sure?' } do%>
+        <span class="glyphicon glyphicon-remove"></span>
+      <%end%>
+
+    </small>
   </h2>
-
-  <strong>Name:</strong>
-  <% location.people.each do |person| %>
-    <p><%= person.Title %></p>
-    <p><%= person.FirstName%> <%= person.LastName %></p>
-    <p><%= person.MobilePhone%></p>        
-    <p><%= person.EmailName%></p>
-
-  <% end %>
 
   <strong>Address:</strong>
   <p><%= location.Address%></p>
   <p><%= location.Address1 %></p>
   <p><%= location.City%> <%=location.StateOrProvince %><%=location.PostalCode %></p>
   <strong>phone:</strong>
-  <p><%= location.WorkPhone %>
-  <%= location.FaxNumber %>
+  <p><%= location.WorkPhone %></p>
   <strong>fax:</strong>
-  <%=location.is_primary%>
-  </p>
-
-  
+  <p><%= location.FaxNumber %></p>
 
 </div>

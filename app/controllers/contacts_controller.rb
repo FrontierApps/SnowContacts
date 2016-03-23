@@ -8,8 +8,24 @@ class ContactsController < ApplicationController
     end
     
     def index
-      @contacts = Contact.all
-        
+      @location = Location.new
+      if params[:id]
+      @contact = Contact.find(params[:id])
+          respond_to do |format|
+            format.html { render "show" }
+            format.js { render "show" }
+          end
+      else
+      end
+    end
+    def show
+    
+    @contact = Contact.find(params[:id])
+    @location = Location.new
+        respond_to do |format|
+          format.html { render "show" }
+          format.js { render "show" }
+        end
     end
         
     def create
@@ -44,6 +60,6 @@ class ContactsController < ApplicationController
     
     private
     def contact_params
-    	params.require(:contact).permit(:CompanyName)
+    	params.require(:contact).permit(:CompanyName, :Address, :Address1, :City, :StateOrProvince, :PostalCode, :WorkPhone, :FaxNumber)
     end
 end
