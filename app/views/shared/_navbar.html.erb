@@ -11,7 +11,9 @@
 		   </div>
 		   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      	<ul class="nav navbar-nav">
-	     		  <li><%= link_to 'New Contact', new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} %></li>
+	     		  <li>
+	     		  	<%= link_to 'New Company', new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} %>
+	     		  </li>
 				  </ul>
 			 <%= form_tag(contacts_path, :method => "get", id: "search-form",  class: "navbar-form navbar-left", remote: true) do %>
        <div class="form-group">

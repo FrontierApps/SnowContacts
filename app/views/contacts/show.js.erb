@@ -2,7 +2,7 @@ $('#myContactForm').modal('hide');
 $('.modal-backdrop').remove();
 $("body").removeClass("modal-open");
 $('#contact').replaceWith('<%= j render('show') %>');
-$("#wrapper").toggleClass("toggled");
-
+$("#wrapper").removeClass("toggled");
+$('.sidebar-nav').html('<%= j render('contacts/links') %>');
 
 
