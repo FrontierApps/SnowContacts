@@ -1,39 +1,39 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<%= form_for [@contact, @contact.locations.build], remote: true do |f| %>
   <div class="modal-dialog" role="form">
     <div class="modal-content">
       <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel">New Location</h4>
       </div>
       <div class="modal-body">
-<%= form_for([@contact, @contact.locations.build]) do |f| %>
-  <p>
-    <%= f.label :locationName %><br>
-    <p><%= f.text_field :locationName %></p>
-  </p>
-  <p>
-    <%= f.label :Address %><br>
-    <p><%= f.text_field :Address %></p>
-    <p><%= f.text_field :Address1 %></p>
-  </p>
-  <p>
-  	<%= f.text_field :City ,:size=>20 %>
-  	<%= f.text_field :StateOrProvince ,:size=>2 %>
-  	<%= f.text_field :PostalCode ,:size=>5%>
-  <p>
-    <%= f.label :WorkPhone %><br>
-    <%= f.telephone_field(:WorkPhone) %>
-  </p>
-  <p>
-    <%= f.label :FaxNumber %><br>
-    <%= f.telephone_field(:FaxNumber) %>
-  </p>
-  
-<div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= f.submit ({ :class => 'btn btn-primary' })%>
-        <% end %>
+
+        <p>
+          <%= f.label :locationName %><br>
+          <p><%= f.text_field :locationName %></p>
+        </p>
+        <p>
+          <%= f.label :Address %><br>
+          <p><%= f.text_field :Address %></p>
+          <p><%= f.text_field :Address1 %></p>
+        </p>
+        <p>
+        	<%= f.text_field :City ,:size=>20 %>
+        	<%= f.text_field :StateOrProvince ,:size=>2 %>
+        	<%= f.text_field :PostalCode ,:size=>5%>
+        <p>
+          <%= f.label :WorkPhone %><br>
+          <%= f.telephone_field(:WorkPhone) %>
+        </p>
+        <p>
+          <%= f.label :FaxNumber %><br>
+          <%= f.telephone_field(:FaxNumber) %>
+        </p>
+    
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit ({ :class => 'btn btn-primary' })%>
+          </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>

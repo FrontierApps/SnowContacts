@@ -18,8 +18,8 @@ class ContactsController < ApplicationController
       else
       end
     end
+
     def show
-    
     @contact = Contact.find(params[:id])
     @location = Location.new
         respond_to do |format|

@@ -26,7 +26,7 @@ class LocationsController < ApplicationController
   end
   def new
     @location = Location.new
-    @contact = Contact.find(params[:id])
+    @contact = Contact.find(params[:contact_id])
   end
   def edit
     @location = Location.find(params[:id])
@@ -47,19 +47,18 @@ class LocationsController < ApplicationController
     @location = @contact.locations.create(location_params)
     flash[:notice] = "Location was successfully created." 
      if @location.save
-      respond_to do |format|
-                format.js { render "show" }
-            end
+      redirect_to contact_path(params[:contact_id]), status: 303, format: 'js'
+       
      end
 	end
   def destroy
     @contact = Contact.find(params[:contact_id])
     @location = @contact.locations.find(params[:id])
     @location.destroy
-    redirect_to contact_path(@contact)
+      redirect_to contact_path(params[:contact_id]), status: 303, format: 'js'
+       
   end
 end
-
  
   private
     def location_params

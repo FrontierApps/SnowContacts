@@ -6,7 +6,8 @@
       <%end%>
       <%= link_to [location.contact, location],
           method: :delete,
-          data: { confirm: 'Are you sure?' } do%>
+          data: { confirm: 'Are you sure?' },
+          remote: true do%>
         <span class="glyphicon glyphicon-remove"></span>
       <%end%>
 
