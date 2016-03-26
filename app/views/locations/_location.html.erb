@@ -1,7 +1,7 @@
 <div class="thumbnail">
   <h2> <%=location.locationName%>
     <small>
-      <%= link_to edit_contact_path(@contact), remote: true do%>
+      <%= link_to edit_contact_location_path(@contact, location.id), remote: true do%>
         <span class="glyphicon glyphicon-pencil"></span>
       <%end%>
       <%= link_to [location.contact, location],

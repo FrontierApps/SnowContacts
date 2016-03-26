@@ -30,12 +30,13 @@ class LocationsController < ApplicationController
   end
   def edit
     @location = Location.find(params[:id])
+    @contact = Contact.find(params[:contact_id])
   end	
 
   def update
     @location = Location.find(params[:id])
     if @location.update(location_params)
-      redirect_to location, format: 'js'
+      redirect_to contact_path(params[:contact_id]), status: 303, format: 'js'
       
     else 
 
