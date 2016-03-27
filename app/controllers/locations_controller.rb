@@ -36,7 +36,7 @@ class LocationsController < ApplicationController
   def update
     @location = Location.find(params[:id])
     if @location.update(location_params)
-      redirect_to contact_path(params[:contact_id]), status: 303, format: 'js'
+      redirect_to contact_path(params[:contact_id]), format: 'js'
       
     else 
 
