@@ -1,8 +1,7 @@
+$('.location').html(" ");
 $('#myContactForm').modal('hide');
 $('.modal-backdrop').remove();
 $("body").removeClass("modal-open");
 $('#contact').replaceWith('<%= j render('show') %>');
-$("#wrapper").removeClass("toggled");
-$('.sidebar-nav').html('<%= j render('contacts/links') %>');
-
+$('.location').append('<%= j render('links') %>');
 
