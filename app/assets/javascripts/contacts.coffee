@@ -5,8 +5,5 @@
 
 $(document).ready ->
   $('#search').select2 theme: 'bootstrap'
- # $('#search').select2().on 'change', (e) ->
- #  @form.submit()
-
   
   return
