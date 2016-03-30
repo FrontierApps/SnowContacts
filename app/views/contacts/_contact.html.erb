@@ -1,12 +1,10 @@
 <div class="thumbnail">
-  </h2>
-
-  <strong>Name:</strong>
-    <p><%= contact.Title %></p>
-    <p><%= contact.FirstName%> <%= contact.LastName %></p>
-    <p><%= contact.MobilePhone%></p>        
-    <p><%= contact.EmailName%></p>
-
+<div class="leftThumbnail">
+  <p><strong>Name:</strong><%= contact.Title %><%= contact.FirstName%> <%= contact.LastName %></p>
+  <p><strong>Cell Phone:</strong><%= contact.MobilePhone%></p>
+  <p><strong>Email:</strong><%= contact.EmailName%></p>
+</div>
+<div class="rightThumbnail">
   <strong>Address:</strong>
   <p><%= contact.Address%></p>
   <p><%= contact.Address1 %></p>
@@ -15,7 +13,7 @@
   <p><%= contact.WorkPhone %></p>
   <strong>fax:</strong>
   <p><%= contact.FaxNumber %></p>
-
+</div>
   
 
 </div>
