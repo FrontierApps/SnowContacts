@@ -1,18 +1,19 @@
 <div class="thumbnail">
-<div class="leftThumbnail">
+<div class="col-sm-8">
   <p><strong>Name:</strong><%= contact.Title %><%= contact.FirstName%> <%= contact.LastName %></p>
   <p><strong>Cell Phone:</strong><%= contact.MobilePhone%></p>
-  <p><strong>Email:</strong><%= contact.EmailName%></p>
+  <p><strong>Email:</strong><%=contact.EmailName%></p>
 </div>
-<div class="rightThumbnail">
+<div class="col-sm-8 rightThumbnail">
   <strong>Address:</strong>
   <p><%= contact.Address%></p>
   <p><%= contact.Address1 %></p>
   <p><%= contact.City%> <%=contact.StateOrProvince %><%=contact.PostalCode %></p>
   <strong>phone:</strong>
-  <p><%= contact.WorkPhone %></p>
+  
+  <p><%= number_to_phone(contact.WorkPhone, area_code: true) %></p>
   <strong>fax:</strong>
-  <p><%= contact.FaxNumber %></p>
+  <p><%= number_to_phone(contact.FaxNumber, area_code: true) %></p>
 </div>
   
 

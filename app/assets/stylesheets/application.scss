@@ -4,7 +4,7 @@
 @import "bootstrap/theme";
 @import "select2";
 @import "select2-bootstrap";
-@import "simple-sidebar";
+
 
 
 body { 
@@ -21,11 +21,9 @@ a {
 	min-width: 18em;
 	@media (min-width: 768px){
 	display: flex;
-	.leftThumbnail{
-	width: 50%;
-	}
 	.rightThumbnail{
-	width: 50%;
+	border-left: 2px solid black;
+	height: 100%;
 	}
 }
 }
