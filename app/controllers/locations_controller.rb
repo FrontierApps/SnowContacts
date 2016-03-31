@@ -63,7 +63,7 @@ end
  
   private
     def location_params
-      params.require(:location).permit(:locationName, :Address, :Address1, :City, :StateOrProvince, :PostalCode, :WorkPhone)
+      params.require(:location).permit(:locationName, :onsiteContactName, :Address, :Address1, :City, :StateOrProvince, :PostalCode, :WorkPhone, :FaxNumber, :notes)
     end
 
 

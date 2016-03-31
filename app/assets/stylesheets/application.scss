@@ -12,7 +12,14 @@ body {
 	}
 a {
 	color: gray;
-	
+}
+@media (min-width: 768px){
+	.searchText{
+		width: 30em;
+	}
+}
+.alignRight{
+	float: right;
 }
 .thumbnail {
 	background-color: #DDD;
@@ -24,6 +31,11 @@ a {
 	.rightThumbnail{
 	border-left: 2px solid black;
 	height: 100%;
+	margin: 8px;
+	}
+	.leftThumbnail{
+	height: 100%;
+	margin: 8px;
 	}
 }
 }

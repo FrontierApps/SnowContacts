@@ -9,6 +9,7 @@ class ContactsController < ApplicationController
     
     def index
       @location = Location.new
+      @person = Person.new
       if params[:id]
       @contact = Contact.find(params[:id])
           respond_to do |format|
@@ -22,6 +23,7 @@ class ContactsController < ApplicationController
     def show
     @contact = Contact.find(params[:id])
     @location = Location.new
+    @person = Person.new
         respond_to do |format|
           format.html { render "show" }
           format.js { render "show" }

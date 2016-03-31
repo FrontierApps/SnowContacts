@@ -1,14 +1,23 @@
 <div class="thumbnail">
-<div class="col-sm-8">
-  <p><strong>Name:</strong><%= contact.Title %><%= contact.FirstName%> <%= contact.LastName %></p>
-  <p><strong>Cell Phone:</strong><%= contact.MobilePhone%></p>
-  <p><strong>Email:</strong><%=contact.EmailName%></p>
+<div class="col-sm-8 leftThumbnail">
+  <div>
+    <span><strong>Name: </strong></span>
+    <span class="alignRight"><%= contact.Title %><%= contact.FirstName%> <%= contact.LastName %></span>
+  </div>
+  <div>
+    <span><strong>Cell Phone: </strong></span>
+    <span class="alignRight"><%= number_to_phone(contact.MobilePhone, area_code: true)%></span>
+  </div>
+  <div>
+    <span><strong>Email: </strong></span>
+    <span class="alignRight"><%=mail_to contact.EmailName%></span>
+  </div>
 </div>
 <div class="col-sm-8 rightThumbnail">
   <strong>Address:</strong>
   <p><%= contact.Address%></p>
   <p><%= contact.Address1 %></p>
-  <p><%= contact.City%> <%=contact.StateOrProvince %><%=contact.PostalCode %></p>
+  <p><%= contact.City%> <%=contact.StateOrProvince %> <%=contact.PostalCode %></p>
   <strong>phone:</strong>
   
   <p><%= number_to_phone(contact.WorkPhone, area_code: true) %></p>

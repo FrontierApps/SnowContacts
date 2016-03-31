@@ -1,5 +1,6 @@
 class Person < ApplicationRecord
 	belongs_to :contact
 	
-	scope :matchesLocation, ->(id){ where(location_id: id)}
+	scope :matchesContact, ->(id){ where(contact_id: id)}
+	
 end

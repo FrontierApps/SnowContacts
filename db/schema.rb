@@ -52,16 +52,17 @@ ActiveRecord::Schema.define(version: 20160314003853) do
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "contact_id"
     t.string   "locationName"
+    t.string   "onsiteContactName"
     t.string   "Address"
-    t.string   "Address1",        limit: 50
-    t.string   "City",            limit: 50
-    t.string   "StateOrProvince", limit: 20
-    t.string   "PostalCode",      limit: 20
-    t.string   "WorkPhone",       limit: 30
-    t.string   "FaxNumber",       limit: 30
+    t.string   "Address1",          limit: 50
+    t.string   "City",              limit: 50
+    t.string   "StateOrProvince",   limit: 20
+    t.string   "PostalCode",        limit: 20
+    t.string   "WorkPhone",         limit: 30
+    t.string   "FaxNumber",         limit: 30
     t.string   "notes"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   add_index "locations", ["contact_id"], name: "index_locations_on_contact_id", using: :btree

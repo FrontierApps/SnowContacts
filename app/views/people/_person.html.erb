@@ -1,11 +1,38 @@
-  
-    <div>
-   
-  		 <strong>Name:</strong>
-        <% location.people.each do |person| %>
-        <%= person.FirstName %>
-        <% end %>
-		
-	</div>
+<div class="thumbnail">
+  <div class="col-sm-8">
+    <h4> <%= person.firstName%> <%= person.lastName %>
+      <small>
+      
+        <%= link_to edit_contact_person_path(@contact, person.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} do  %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <%end%>
+        <%= link_to [person.contact, person],
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            remote: true do%>
+          <span class="glyphicon glyphicon-remove"></span>
+        <%end%>
 
-  
+      </small>
+    </h4>
+  </div>
+  <div class="col-sm-8 rightThumbnail">
+   
+   <div>
+    <span><strong>Title: </strong></span>
+    <span class="alignRight"><%= person.title %></span>
+  </div>
+  <div>
+    <span><strong>Cell Phone: </strong></span>
+    <span class="alignRight"><%= number_to_phone(person.mobilePhone, area_code: true)%></span>
+  </div>
+  <div>
+    <span><strong>Email: </strong></span>
+    <span class="alignRight"><%=mail_to person.emailName%></span>
+  </div>
+    <div>
+    <span><strong>Notes: </strong></span>
+    <span class="alignRight"><%=person.notes%></span>
+  </div>
+</div>
+</div>
