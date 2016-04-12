@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SnowContact</title>
+    <title>Contact Manager</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
@@ -12,7 +12,7 @@
 
   <body>
 
-  
+  <%= render :partial => 'shared/navbar' %>
   <div id="wrapper">
         <div id="page-content-wrapper">
             <div class="container-fluid">
@@ -22,11 +22,20 @@
                   <div class="col-sm-8">
 
                      <%= yield %>
-                      
+                      <div id="user_nav">
+                      <% if user_signed_in? %>
+                      Signed in as <%= current_user.email %>. Not you?
+                      <%= link_to "Sign out", destroy_user_session_path %>
+                      <% else %>
+                      <%= link_to "Sign up", new_user_registration_path %> or
+                      <%= link_to "Sign in", new_user_session_path %>
+                      <% end %>
+                      </div>
                   </div>
                 </div>
             </div>
         </div>
+    <div id="myContactForm" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
   </div>  
   
   </body>
