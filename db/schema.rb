@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409221206) do
+ActiveRecord::Schema.define(version: 20160418163413) do
 
-  create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string   "FirstName",         limit: 50
     t.string   "LastName",          limit: 50
     t.string   "Dear",              limit: 50
@@ -45,8 +45,8 @@ ActiveRecord::Schema.define(version: 20160409221206) do
     t.string   "ContactsInterests"
     t.boolean  "Newsletter",                           default: false, null: false
     t.string   "Attn",              limit: 50
-    t.datetime "created_at",                                           null: false
-    t.datetime "updated_at",                                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160409221206) do
     t.integer  "admin",                  limit: 1
     t.string   "firstname"
     t.string   "lastname"
+    t.integer  "active",                 limit: 1
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
