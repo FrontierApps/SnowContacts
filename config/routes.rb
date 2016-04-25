@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :signs do
+    resources :attributes
   	resources :records
   end
 end
