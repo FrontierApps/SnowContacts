@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AttributeTest < ActiveSupport::TestCase
+class SignDetailTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
