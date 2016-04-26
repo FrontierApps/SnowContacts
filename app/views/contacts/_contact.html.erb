@@ -12,6 +12,11 @@
     <span><strong>Email: </strong></span>
     <span class="alignRight"><%=mail_to contact.EmailName%></span>
   </div>
+  <div>
+  <%= link_to contact_path(@contact) do%>
+  <span class="glyphicon glyphicon-remove"></span>
+  <%end%>
+  </div>
 </div>
 <div class="col-sm-8 rightThumbnail">
   <strong>Address:</strong>

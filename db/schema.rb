@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418163413) do
+ActiveRecord::Schema.define(version: 20160425184829) do
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string   "FirstName",         limit: 50
@@ -81,6 +81,43 @@ ActiveRecord::Schema.define(version: 20160418163413) do
 
   add_index "people", ["contact_id"], name: "index_people_on_contact_id", using: :btree
 
+  create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "sign_id"
+    t.string   "customerDesc"
+    t.string   "solution"
+    t.datetime "requestDate"
+    t.datetime "finishDate"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "records", ["sign_id"], name: "index_records_on_sign_id", using: :btree
+
+  create_table "sign_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "sign_id"
+    t.string   "detail"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "sign_details", ["sign_id"], name: "index_sign_details_on_sign_id", using: :btree
+
+  create_table "signs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "contact_id"
+    t.integer  "location_id"
+    t.string   "signDesc"
+    t.string   "signLoc"
+    t.integer  "active",      limit: 1
+    t.string   "builtBy"
+    t.datetime "installDate"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "signs", ["contact_id"], name: "index_signs_on_contact_id", using: :btree
+  add_index "signs", ["location_id"], name: "index_signs_on_location_id", using: :btree
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                            default: "", null: false
     t.string   "encrypted_password",               default: "", null: false
@@ -92,10 +129,6 @@ ActiveRecord::Schema.define(version: 20160418163413) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
     t.integer  "admin",                  limit: 1
@@ -104,7 +137,6 @@ ActiveRecord::Schema.define(version: 20160418163413) do
     t.integer  "active",                 limit: 1
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
