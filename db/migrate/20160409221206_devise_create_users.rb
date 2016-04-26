@@ -35,6 +35,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.integer :admin, :limit => 1
       t.string :firstname
       t.string :lastname
+      t.integer :active, :limit => 1
     end
 
     add_index :users, :email,                unique: true
