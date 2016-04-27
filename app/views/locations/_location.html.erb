@@ -18,7 +18,9 @@
     <div> <%=location.onsiteContactName%> </div>
     <div><strong>Notes:</strong></div>
     <div> <%=location.notes%> </div>
-
+    <div>
+  <%= link_to 'Signs', :action => :index, :controller => :signs, :id => @contact.id, :loc => location.id %>
+  </div>
   </div>
   <div class="col-sm-8 rightThumbnail">
     <strong>Address:</strong>
