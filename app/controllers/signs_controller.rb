@@ -8,4 +8,7 @@ class SignsController < ApplicationController
 		@location = Location.find(params[:loc])
 		end
 	end
+	def new
+        @sign = Sign.new
+    end
 end

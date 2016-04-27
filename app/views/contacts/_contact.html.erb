@@ -13,7 +13,7 @@
     <span class="alignRight"><%=mail_to contact.EmailName%></span>
   </div>
   <div>
-  <%= link_to 'Signs', :action => :index, :controller => :signs, :id => @contact.id, :loc => 'main' %>
+  <%= link_to 'Add a sign to this location', new_sign_path(:id => @contact.id, :loc => 'main'), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %>
   </div>
 </div>
 <div class="col-sm-8 rightThumbnail">

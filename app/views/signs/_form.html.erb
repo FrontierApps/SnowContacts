@@ -1,0 +1,59 @@
+<%= form_for @sign, remote: true do |f| %>
+  <div class="modal-dialog" role="form">
+    <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><h4 class="modal-title" id="myModalLabel"><%= :title%></h4>
+    </div>
+      <div class="modal-body">
+
+<% if @sign.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@sign.errors.count, "error") %> prohibited
+        this sign from being saved:
+      </h2>
+      <ul>
+        <% @sign.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="modalLeft">
+      <p>
+      <%= f.label :signDesc %><br>
+      <%= f.text_field :signDesc %>
+       <p>
+        <%= f.label :signLoc %><br>
+        <%= f.text_field :signLoc %>
+      </p>
+      <p>
+        <%= f.label :active %><br>
+        <%= f.text_field :active  %>
+      </p>
+      <p>
+        <%= f.label :builtBy %><br>
+        <%= f.text_field :builtBy  %>
+      </p>      
+      <p>
+        <%= f.label :installDate %><br>
+        <%= f.date_field :installDate  %>
+      </p>
+    </div>
+    <div class="modalRight">
+
+    </div>
+  </div>
+  <%=hidden_field(:object, sign[id], :id => params[:id])%>
+  <%=hidden_field(:object, sign[loc], :loc => params[:loc])%>
+
+
+<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit ({ :class => 'btn btn-primary'})%>
+        
+</div>
+</div>
+</div>
+<% end %>
+
