@@ -16,11 +16,13 @@
       </small>
     </h4>
     <div> <%=location.onsiteContactName%> </div>
-    <div><strong>Notes:</strong></div>
-    <div> <%=location.notes%> </div>
+    
     <div>
-  <%= link_to 'Signs', :action => :index, :controller => :signs, :id => @contact.id, :loc => location.id %>
-  </div>
+      <span><strong><%= link_to "Current Signs", sign_path(:id => @contact.id, :loc => location.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %></strong></span>
+    </div>
+    <div>
+      <%= link_to 'Add a sign to this location', new_sign_path(:id => @contact.id, :loc => location.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %>
+    </div>
   </div>
   <div class="col-sm-8 rightThumbnail">
     <strong>Address:</strong>
@@ -31,5 +33,7 @@
     <p><%=number_to_phone(location.WorkPhone, area_code: true)%></p>
     <strong>fax:</strong>
     <p><%=number_to_phone(location.FaxNumber, area_code: true)%></p>
+    <strong>Notes:</strong>
+    <p> <%=location.notes%> </p>
   </div>
 </div>

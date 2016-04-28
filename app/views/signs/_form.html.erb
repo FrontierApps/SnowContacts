@@ -44,8 +44,8 @@
 
     </div>
   </div>
-  <%=hidden_field(:object, sign[id], :id => params[:id])%>
-  <%=hidden_field(:object, sign[loc], :loc => params[:loc])%>
+  <%=f.hidden_field :contact_id, value: params[:id]%>
+  <%=f.hidden_field :location_id, value: params[:loc]%>
 
 
 <div class="modal-footer">
