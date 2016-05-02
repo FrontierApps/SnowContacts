@@ -1,0 +1,39 @@
+<div class="thumbnail">
+  <div class="col-sm-8">
+    <h4> <%=location.locationName%>
+      <small>
+      
+        <%= link_to edit_contact_location_path(@contact, location.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} do  %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <%end%>
+        <%= link_to [location.contact, location],
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            remote: true do%>
+          <span class="glyphicon glyphicon-remove"></span>
+        <%end%>
+
+      </small>
+    </h4>
+    <div> <%=location.onsiteContactName%> </div>
+    
+    <div>
+      <span><strong><%= link_to "Current Signs", sign_path(:id => @contact.id, :loc => location.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %></strong></span>
+    </div>
+    <div>
+      <%= link_to 'Add a sign to this location', new_sign_path(:id => @contact.id, :loc => location.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %>
+    </div>
+  </div>
+  <div class="col-sm-8 rightThumbnail">
+    <strong>Address:</strong>
+    <p><%= location.Address%></p>
+    <p><%= location.Address1 %></p>
+    <p><%= location.City%> <%=location.StateOrProvince %><%=location.PostalCode %></p>
+    <strong>phone:</strong>
+    <p><%=number_to_phone(location.WorkPhone, area_code: true)%></p>
+    <strong>fax:</strong>
+    <p><%=number_to_phone(location.FaxNumber, area_code: true)%></p>
+    <strong>Notes:</strong>
+    <p> <%=location.notes%> </p>
+  </div>
+</div>

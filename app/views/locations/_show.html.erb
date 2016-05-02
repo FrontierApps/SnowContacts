@@ -1,29 +1,62 @@
 <div id='contact'>
-	
-  <h1><%=@contact.CompanyName %>
+  
+  <h3><%=@contact.CompanyName %>
 
  <small>  
-  <%= link_to edit_contact_path(@contact), remote: true do%>
+ <%= link_to edit_contact_path(@contact),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} do  %>
   <span class="glyphicon glyphicon-pencil"></span>
   <%end%>
-	<%= link_to contact_path(@contact),
+  <%= link_to contact_path(@contact),
               method: :delete,
               data: { confirm: 'Are you sure?' } do%>
   <span class="glyphicon glyphicon-remove"></span>
   <%end%>
+  <%= link_to "Back to Main Contact", contact_path(@contact), {:remote => true} %>
   </small>
-  </h1>
+  </h3>
+ <h2><%=@locations.locationName%>
+      <small>
+      
+        <%= link_to edit_contact_location_path(@contact, @locations.id), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} do  %>
+          <span class="glyphicon glyphicon-pencil"></span>
+        <%end%>
+        <%= link_to [@locations.contact, @locations],
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            remote: true do%>
+          <span class="glyphicon glyphicon-remove"></span>
+        <%end%>
 
+      </small>
+    </h2>
+  
   <div class="row">
-    <div class="col-sm-6 col-md-4">
-      <%= render @locations%>
+   
+      <div class="thumbnail">
+  <div class="col-sm-8">
+    
+    <div> <%=@locations.onsiteContactName%> </div>
+    
+    <div>
+      <span><strong><%= link_to "Current Signs", sign_path(:id => @contact.id, :loc => @locations.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %></strong></span>
+    </div>
+    <div>
+      <%= link_to 'Add a sign to this location', new_sign_path(:id => @contact.id, :loc => @locations.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %>
     </div>
   </div>
-
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-      Add a Location
-  </button>
-    <%= render 'locations/form' %>    
-
- </div>   
-
+  <div class="col-sm-8 rightThumbnail">
+    <strong>Address:</strong>
+    <p><%= @locations.Address%></p>
+    <p><%= @locations.Address1 %></p>
+    <p><%= @locations.City%> <%=@locations.StateOrProvince %><%=@locations.PostalCode %></p>
+    <strong>phone:</strong>
+    <p><%=number_to_phone(@locations.WorkPhone, area_code: true)%></p>
+    <strong>fax:</strong>
+    <p><%=number_to_phone(@locations.FaxNumber, area_code: true)%></p>
+    <strong>Notes:</strong>
+    <p> <%=@locations.notes%> </p>
+  </div>
+</div>
+       
+  </div>
+</div> 

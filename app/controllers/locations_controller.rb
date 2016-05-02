@@ -16,8 +16,8 @@ class LocationsController < ApplicationController
   end
   def show
     
-    @locations = Location.matchesContact(params[:id])
-    @contact = Contact.find(params[:id])
+    @locations = Location.find(params[:id])
+    @contact = Contact.find(params[:contact_id])
     @location = Location.new
       respond_to do |format|
         format.html { render "show" }
