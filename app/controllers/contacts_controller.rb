@@ -12,6 +12,7 @@ class ContactsController < ApplicationController
     def index
       @location = Location.new
       @person = Person.new
+      @contacts = Contact.all.order('CompanyName asc')
       if params[:id]
       @contact = Contact.find(params[:id])
           respond_to do |format|

@@ -1,0 +1,23 @@
+// Place all the styles related to the timerecord controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.big_button{
+	font-size: 6em !important;
+}
+.container {
+	text-align: center;
+}
+.big_drop{
+	font-size: 2em !important;
+
+}
+.column_wide{
+	padding-right:1em;
+	padding-left:1em;
+	text-align: center;
+}
+@media print {
+  a[href]:after {
+    content: none !important;
+  }
+}
