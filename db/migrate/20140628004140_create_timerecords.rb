@@ -7,6 +7,7 @@ class CreateTimerecords < ActiveRecord::Migration
       t.datetime :timein
       t.datetime :timeout
       t.timestamps
+      t.float :total
     end
   end
 end

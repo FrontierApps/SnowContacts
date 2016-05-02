@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.datetime "updated_at"
   end
 
+  create_table "jobnumbers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "JobNumber",   limit: 45
+    t.integer  "contacts_id"
+    t.date     "DateStart"
+    t.boolean  "Complete",                default: false
+    t.string   "projectName", limit: 45
+    t.string   "Rep",         limit: 45
+    t.string   "RequestedBy", limit: 90
+    t.string   "QuoteRef",    limit: 45
+    t.date     "DueDate"
+    t.string   "notes",       limit: 400
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "contact_id"
     t.string   "locationName"
@@ -63,9 +78,8 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.string   "notes"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
+    t.index ["contact_id"], name: "index_locations_on_contact_id", using: :btree
   end
-
-  add_index "locations", ["contact_id"], name: "index_locations_on_contact_id", using: :btree
 
   create_table "people", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "contact_id"
@@ -77,9 +91,8 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.string   "notes"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["contact_id"], name: "index_people_on_contact_id", using: :btree
   end
-
-  add_index "people", ["contact_id"], name: "index_people_on_contact_id", using: :btree
 
   create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "sign_id"
@@ -89,9 +102,8 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.datetime "finishDate"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["sign_id"], name: "index_records_on_sign_id", using: :btree
   end
-
-  add_index "records", ["sign_id"], name: "index_records_on_sign_id", using: :btree
 
   create_table "sign_details", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "sign_id"
@@ -99,9 +111,8 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["sign_id"], name: "index_sign_details_on_sign_id", using: :btree
   end
-
-  add_index "sign_details", ["sign_id"], name: "index_sign_details_on_sign_id", using: :btree
 
   create_table "signs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "contact_id"
@@ -113,10 +124,26 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.datetime "installDate"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.index ["contact_id"], name: "index_signs_on_contact_id", using: :btree
+    t.index ["location_id"], name: "index_signs_on_location_id", using: :btree
   end
 
-  add_index "signs", ["contact_id"], name: "index_signs_on_contact_id", using: :btree
-  add_index "signs", ["location_id"], name: "index_signs_on_location_id", using: :btree
+  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "taskname"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "timerecords", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "jobnumber"
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.datetime "timein"
+    t.datetime "timeout"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.float    "total",      limit: 24
+  end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                            default: "", null: false
@@ -135,9 +162,8 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.string   "firstname"
     t.string   "lastname"
     t.integer  "active",                 limit: 1
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
