@@ -3,7 +3,7 @@
 <%@jobname = Jobnumbers.find_by JobNumber: @jobnumber%>
     <%if (@jobname == nil)%>
     <%else%>
-    <%@customername = Contacts.find_by! id: @jobname.contacts_id%>
+    <%@customername = Contact.find_by! id: @jobname.contact_id%>
     <h1><%=@customername.CompanyName%></h1>
     <h2><%=@jobname.projectName%> <%=@jobnumber%></h2>
 <%end%>

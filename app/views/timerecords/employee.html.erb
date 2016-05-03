@@ -37,7 +37,7 @@
     <td></td>
     <td></td>
     <%else%>
-    <%@customername = Contacts.find_by! id: @jobname.contacts_id%>
+    <%@customername = Contact.find_by! id: @jobname.contact_id%>
     <td><%= link_to '', edit_timerecord_path(t.id), :class => 'glyphicon glyphicon-pencil' %></td>
     <td><%=@customername.CompanyName%></td>
     <td><%=@jobname.projectName%></td>

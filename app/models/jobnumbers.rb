@@ -1,4 +1,4 @@
 class Jobnumbers < ActiveRecord::Base
-	belongs_to :contacts
+	belongs_to :contact
 	has_many :timerecords
 	end
