@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :timerecords
   has_many :tasks, through: :timerecords
+
+	def fullName
+		fullName = "#{firstname} #{lastname}"
+	end
 end
