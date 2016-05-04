@@ -30,12 +30,12 @@
       </small>
     </h2>
   
-  <div class="row">
+  <div>
    
       <div class="thumbnail">
   <div class="col-sm-8">
     
-    <div> <%=@locations.onsiteContactName%> </div>
+    <div> <strong>Contact:</strong><%=@locations.onsiteContactName%> </div>
     
     <div>
       <span><strong><%= link_to "Current Signs", sign_path(:id => @contact.id, :loc => @locations.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %></strong></span>
@@ -49,6 +49,7 @@
     <p><%= @locations.Address%></p>
     <p><%= @locations.Address1 %></p>
     <p><%= @locations.City%> <%=@locations.StateOrProvince %><%=@locations.PostalCode %></p>
+    <p><%= link_to "Go to map", "https://www.google.com/maps/search/"+@locations.Address+@locations.City+@locations.StateOrProvince+@locations.PostalCode%></p>
     <strong>phone:</strong>
     <p><%=number_to_phone(@locations.WorkPhone, area_code: true)%></p>
     <strong>fax:</strong>

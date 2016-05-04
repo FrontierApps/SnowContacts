@@ -3,7 +3,3 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$(document).ready ->
-  $('#search').select2 theme: 'bootstrap'
-  
-  return

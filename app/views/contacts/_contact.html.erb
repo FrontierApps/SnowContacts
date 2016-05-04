@@ -24,6 +24,9 @@
   <p><%= contact.Address%></p>
   <p><%= contact.Address1 %></p>
   <p><%= contact.City%> <%=contact.StateOrProvince %> <%=contact.PostalCode %></p>
+  
+  <p><%= link_to "Go to map", "https://www.google.com/maps/search/"+ contact.Address+" "+contact.City+" "+contact.StateOrProvince+" "+contact.PostalCode %></p>
+
   <strong>phone:</strong>
   
   <p><%= number_to_phone(contact.WorkPhone, area_code: true) %></p>

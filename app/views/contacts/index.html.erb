@@ -1,8 +1,15 @@
+<div class="company">
+	<span>
+		<%= button_to 'New Company', new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm', :method => "get", "class" => "btn btn-primary"} %>
+	</span>
+</div>	
+
 <div class="search">
-	<%= form_tag(contacts_path, :method => "get", id: "search-form",  class: "navbar-form navbar-left", remote: true) do %>
+	<%= form_tag(contacts_path, :method => "get", id: "search-form", remote: true) do %>
 		<div class="form-group searchText">
 			<%= select_tag "id", options_from_collection_for_select($contacts,"id", "CompanyName", params[:search]), id: "search", include_blank: true, :onchange => "$(this.form).submit();"%>
 		</div>
 	<% end %>
 </div>
+	     		  	
 <div id="contact"></div>

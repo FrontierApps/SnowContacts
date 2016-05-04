@@ -1,9 +1,5 @@
-<li>
-<%= link_to 'New Company', new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} %>
-</li>
-<li>
-<%= link_to 'New Location', new_contact_location_path(@contact, @location),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} %>
-</li>
-<li>
-<%= link_to 'New Contact', new_contact_person_path(@contact, @person),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm'} %>
-</li>
+<span class = "inlinebuttons">
+<%= button_to 'New Company', new_contact_path,  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm', :method => "get", "class" => "btn btn-primary"} %>
+<%= button_to 'Add Location', new_contact_location_path(@contact, @location),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm', :method => "get", "class" => "btn btn-primary"} %>
+<%= button_to 'Add Contact', new_contact_person_path(@contact, @person),  {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#myContactForm', :method => "get", "class" => "btn btn-primary"} %>
+</span>
