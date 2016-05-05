@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+  	@user = User.find(params[:id]).decorate
     respond_to do |format|
       format.html { render "show" }
       format.js { render "show" }

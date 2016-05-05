@@ -9,4 +9,5 @@ class User < ApplicationRecord
 	def fullName
 		fullName = "#{firstname} #{lastname}"
 	end
+
 end
