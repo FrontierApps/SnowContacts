@@ -8,9 +8,6 @@ class TimerecordDecorator < Draper::Decorator
 			Time.now.strftime("%I:%M %p")
 		end
  end
- def Total_time
- 	"#{total_figure}"
- end
 
     private
 
@@ -18,9 +15,5 @@ class TimerecordDecorator < Draper::Decorator
 		object.timeout.strftime("%I:%M %p")
 	end
 
-	def total_figure
-		"#{timed_out_status}" - object.timein
-		
-	end
 
 end

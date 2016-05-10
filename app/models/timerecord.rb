@@ -14,5 +14,16 @@ class Timerecord < ActiveRecord::Base
 	scope :thisjob, ->(number) {where('jobnumber = ?', number )} 
 	scope :tasks_all, ->(taskid){where('task_id = ?', taskid)}
 	
-	
+	def timeTotal
+		if timeout?
+			@timeout = timeout
+		else
+			@timeout = Time.current
+		end
+		((Time.diff(timein, @timeout, '%m'))[:diff].to_f / 60).round(2)
+	end
+
 end
+
+
+
