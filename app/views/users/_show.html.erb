@@ -24,18 +24,5 @@
       <span><%= check_box_tag 'active', '1', ('checked' if @user.active == 1) , :disabled => true %></span>
     </div>
   </div>
-<div class="table-responsive">
+<%= link_to 'timerecords', timerecords_path(:user_id => @user)%>
 
-
-<table class="table table-hover">
-  <tr>
-    <th>Job Number</th>
-    <th>Date</th>       
-    <th>Time In</th>
-    <th>Time Out</th>
-    <th>Total</th>
-  </tr>
- <%= render @user.timerecords%> 
- </table>
-</div>
-</div>   
