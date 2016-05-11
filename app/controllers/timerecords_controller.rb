@@ -1,13 +1,12 @@
 class TimerecordsController < ApplicationController
   def index
-  	  @timerecords = current_user.timerecords.timethisweek.decorate
-      if params[:id]
-      @contact = Contact.find(params[:user_id])
-          respond_to do |format|
-            format.html { render "show" }
-            format.js { render "show" }
-          end
+  	  
+      if params[:user_id]
+        @timerecords = Timerecord.selecteduser(params[:user_id]).timethisweek.decorate
+        @user = params[:first_name]
       else
+        @timerecords = current_user.timerecords.timethisweek.decorate
+        @user = current_user.firstname
       end
   end
 end

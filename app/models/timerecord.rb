@@ -23,6 +23,9 @@ class Timerecord < ActiveRecord::Base
 		((Time.diff(timein, @timeout, '%m'))[:diff].to_f / 60).round(2)
 	end
 
+
+
+
 end
 
 

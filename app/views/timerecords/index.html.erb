@@ -1,5 +1,5 @@
 <div class="timerecords">
-<h1> My Hours this week 
+<h1> <%= @user%>'s Hours this week 
 	<small> 
 		<%= link_to 'Last weeks hours', timerecords_path(:time => 'lastweek')%>
 	</small>
@@ -17,6 +17,13 @@
     <th>Total</th>
   </tr>
   <%= render @timerecords %>
+  <tr>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><%= @timerecords.to_a.sum(&:timeTotal)%> Hours</td>
+ </tr>
  </table>
 </div>
 </div>   
