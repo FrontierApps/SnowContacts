@@ -8,6 +8,7 @@ class TimerecordDecorator < Draper::Decorator
 			Time.now.strftime("%I:%M %p")
 		end
  end
+ 
 
     private
 

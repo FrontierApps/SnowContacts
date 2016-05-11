@@ -1,10 +1,18 @@
 <div class="timerecords">
 <h1> <%= @user%>'s Hours this week 
 	<small> 
-		<%= link_to 'Last weeks hours', timerecords_path(:time => 'lastweek')%>
+		<%= link_to 'Last weeks hours', {:controller => "timerecords", :action => "date_range", :startdate => @beginning_of_last_week, :enddate => @end_of_last_week}%>
 	</small>
 </h1>
-
+<div>
+<%= form_tag nil, :method => :get, :class => 'navbar-form navbar-left' do %>
+			<div class="form-group">
+			<%=date_field_tag 'startdate', @beginning_of_last_week, :class => "form-control"%>
+			<%=date_field_tag 'enddate', @end_of_last_week, :class => "form-control"%>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+<% end %>
+</div>
 <div class="table-responsive">
 
 
