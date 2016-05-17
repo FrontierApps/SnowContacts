@@ -1,24 +1,104 @@
 class TimerecordsController < ApplicationController
   before_action :authenticate_user!
   def index
-    
-  	  @timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
-
-   	 	@beginning_of_last_week = Date.today.at_beginning_of_week-8.day
-   		@end_of_last_week = Date.today.at_beginning_of_week-2.day  	  
-  #     if params[:user_id]
-  #       @timerecords = Timerecord.selecteduser(params[:user_id]).timethisweek.decorate
-  #       @user = params[:first_name]
-  #     else
-  #       @timerecords = current_user.timerecords.timethisweek.decorate
-  #       @user = current_user.firstname
-  #     end
+  	d=Date.today
+	@beginning_of_last_week = d.at_beginning_of_week-8.day
+  	@end_of_last_week = d.at_beginning_of_week-2.day
+    @timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
   end
+
+	def new				
+		time = Timerecord.currentuser(current_user.id).notimeout.exists?
+
+		if time
+			@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
+
+			if (@exist_timerecord.jobnumber == params[:job_id])
+				redirect_to :action => 'timeout', :id => @exist_timerecord.id		
+
+			else
+				@old_timerecord = Timerecord.find_by(id: @exist_timerecord.id)
+				flash[:notice] = "You were just timed out of job number "+ @exist_timerecord.jobnumber
+				@old_timerecord.update(timeout: Time.current)
+				@timerecord = Timerecord.new	    
+				@timerecord.jobnumber = params[:job_id]
+			end
+
+		else 		  
+			@timerecord = Timerecord.new	    
+			@timerecord.jobnumber = params[:job_id]
+		end
+	end
+
+	def create
+		@timerecord = Timerecord.new(timerecord_params)
+		@timerecord.user_id = current_user.id
+		@timerecord.timein = Time.current
+		@timerecord.save
+
+		if @timerecord.save
+			redirect_to timerecords_path
+
+		else
+		render 'new'
+		end
+	end
+
+	def timeout
+
+		@timerecord = Timerecord.find(params[:id])
+		@task = Task.find(@timerecord.task_id)
+
+	end
+
+	def edit
+
+		@timerecord = Timerecord.find(params[:id])
+		@task = Task.find(@timerecord.task_id)
+
+	end
+	def update
+		@timerecord = Timerecord.find(params[:id])
+
+		if (@timerecord.timeout == nil)
+			@timerecord.timeout = Time.current
+			@time_diff_components = Time.diff(@timerecord.timein, Time.current, '%m')
+			@timerecord.total = @time_diff_components[:diff].to_f / 60
+
+			if @timerecord.update(timerecord1_params)
+			redirect_to timerecords_path
+			else
+			render 'edit'
+			end
+		else
+			@time_diff_components = Time.diff(@timerecord.timein, params[:timerecord][:timeout], '%m')
+			@timerecord.total = @time_diff_components[:diff].to_f / 60
+			if @timerecord.update(timerecord_params)
+
+			redirect_to timerecords_path
+			else
+			render 'edit'
+			end
+		end
+
+	end
+
+
+
+
 private
 
 # A list of the param names that can be used for filtering the Product list
 def filtering_params(params)
   params.slice(:selecteduser, :weekstart, :weekend)
+end
+
+def timerecord_params
+		params.require(:timerecord).permit(:jobnumber, :user_id, :timein, :timeout, :task_id)
+end
+
+def timerecord1_params
+	params.permit(:jobnumber, :user_id, :timein, :timeout, :task_id)
 end
 
 end

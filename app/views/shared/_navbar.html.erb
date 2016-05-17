@@ -15,7 +15,7 @@
 							<%= link_to 'Contacts', contacts_path %>
 						</li>
 						<li>
-							<%= link_to 'TimeTracker', timerecords_path(:selecteduser => current_user.id) %>
+							<%= link_to 'TimeTracker', timerecords_path(:selecteduser => current_user.id, :weekstart => $beginning_of_this_week , :weekend => $end_of_this_week) %>
 						</li>					
 						<li>
 							<%= link_to 'Employees', users_path %>
