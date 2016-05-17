@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_filter :verify_is_admin
+  
   layout 'user'
 
   def index
@@ -49,6 +50,10 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-	params.require(:user).permit(:email, :firstname, :lastname, :admin, :active)
+		params.require(:user).permit(:email, :firstname, :lastname, :admin, :active)
+	end
+	
+	def verify_is_admin
+  		(current_user.nil?) ? redirect_to(root_path) : (redirect_to(root_path) unless current_user.admin?)
 	end
 	end

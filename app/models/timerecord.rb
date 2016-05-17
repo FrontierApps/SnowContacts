@@ -10,7 +10,6 @@ class Timerecord < ActiveRecord::Base
 	scope :weekstart, -> (weekstart){where('timein >= ?', weekstart).all} 
 	scope :dateis, -> (date){where('timein = ?', date).all} 
 	scope :weekend, -> (weekend){where('timein <= ?', weekend).all} 
-	
 	scope :selecteduser, ->(user) {where('user_id = ?', user )} 
 	scope :thisjob, ->(number) {where('jobnumber = ?', number )} 
 	scope :tasks_all, ->(taskid){where('task_id = ?', taskid)}
