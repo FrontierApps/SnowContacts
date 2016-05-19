@@ -5,7 +5,8 @@ class TimerecordDecorator < Draper::Decorator
 		if timeout?
 			"#{timed_out_at}"
 		else
-			Time.now.strftime("%I:%M %p")
+			h.content_tag :span, Time.zone.now.strftime("%I:%M %p"), class: "stillWorking"
+						
 		end
  end
  

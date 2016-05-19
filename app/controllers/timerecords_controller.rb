@@ -1,9 +1,7 @@
 class TimerecordsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!  	
+
   def index
-  	d=Date.today
-	@beginning_of_last_week = d.at_beginning_of_week-8.day
-  	@end_of_last_week = d.at_beginning_of_week-2.day
     @timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
   end
 
@@ -14,12 +12,12 @@ class TimerecordsController < ApplicationController
 			@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
 
 			if (@exist_timerecord.jobnumber == params[:job_id])
-				redirect_to :action => 'timeout', :id => @exist_timerecord.id		
+				redirect_to :action => 'timeout', :id => @exist_timerecord.id, :selecteduser => current_user.id	
 
 			else
 				@old_timerecord = Timerecord.find_by(id: @exist_timerecord.id)
 				flash[:notice] = "You were just timed out of job number "+ @exist_timerecord.jobnumber
-				@old_timerecord.update(timeout: Time.current)
+				@old_timerecord.update(timeout: Time.zone.now)
 				@timerecord = Timerecord.new	    
 				@timerecord.jobnumber = params[:job_id]
 			end
@@ -31,13 +29,14 @@ class TimerecordsController < ApplicationController
 	end
 
 	def create
+
 		@timerecord = Timerecord.new(timerecord_params)
 		@timerecord.user_id = current_user.id
-		@timerecord.timein = Time.current
+		@timerecord.timein = $timenow
 		@timerecord.save
 
 		if @timerecord.save
-			redirect_to timerecords_path
+			redirect_to timerecords_path(:selecteduser => current_user.id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 
 		else
 		render 'new'
@@ -55,32 +54,16 @@ class TimerecordsController < ApplicationController
 
 		@timerecord = Timerecord.find(params[:id])
 		@task = Task.find(@timerecord.task_id)
+		@@selecteduser = params[:selecteduser]
 
 	end
 	def update
 		@timerecord = Timerecord.find(params[:id])
-
-		if (@timerecord.timeout == nil)
-			@timerecord.timeout = Time.current
-			@time_diff_components = Time.diff(@timerecord.timein, Time.current, '%m')
-			@timerecord.total = @time_diff_components[:diff].to_f / 60
-
-			if @timerecord.update(timerecord1_params)
-			redirect_to timerecords_path
-			else
-			render 'edit'
-			end
+		if @timerecord.update(timerecord_params)
+			redirect_to timerecords_path(:selecteduser => @@selecteduser, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 		else
-			@time_diff_components = Time.diff(@timerecord.timein, params[:timerecord][:timeout], '%m')
-			@timerecord.total = @time_diff_components[:diff].to_f / 60
-			if @timerecord.update(timerecord_params)
-
-			redirect_to timerecords_path
-			else
 			render 'edit'
-			end
 		end
-
 	end
 
 

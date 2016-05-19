@@ -12,7 +12,6 @@
     <p>
     <%= f.datetime_local_field :timeout %>
     </p>
-   
     
     <p class="big_drop"> 
     <%= f.collection_select(:task_id, Task.order(:taskname), :id, :taskname, include_blank: false)%>
