@@ -3,6 +3,7 @@ class TimerecordsController < ApplicationController
 
   def index
     @timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
+    @user = User.find(params[:selecteduser])
   end
 
 	def new				
@@ -54,13 +55,12 @@ class TimerecordsController < ApplicationController
 
 		@timerecord = Timerecord.find(params[:id])
 		@task = Task.find(@timerecord.task_id)
-		@@selecteduser = params[:selecteduser]
-
+		
 	end
 	def update
 		@timerecord = Timerecord.find(params[:id])
 		if @timerecord.update(timerecord_params)
-			redirect_to timerecords_path(:selecteduser => @@selecteduser, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
+			redirect_to timerecords_path(:selecteduser => @timerecord.user_id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 		else
 			render 'edit'
 		end
