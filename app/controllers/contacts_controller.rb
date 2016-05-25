@@ -1,6 +1,6 @@
  
 class ContactsController < ApplicationController
-    before_action :authenticate_user!
+ 
     layout 'contact'
     def new
         @contact = Contact.new

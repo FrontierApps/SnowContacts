@@ -1,5 +1,5 @@
 class SignsController < ApplicationController
-	before_action :authenticate_user!
+
     layout 'contact'
 	def index
 		@contact = Contact.find(params[:id])

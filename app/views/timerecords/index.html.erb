@@ -13,6 +13,9 @@
 			</div>
 			<button type="submit" class="btn btn-default">Submit</button>
 <% end %>
+<span>
+    <%= link_to 'Add Timerecord', timerecords_add_timerecord_path(:user_id => @user.id) %>
+</span>
 </div>
 <div class="table-responsive">
 

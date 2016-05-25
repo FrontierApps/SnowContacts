@@ -1,9 +1,15 @@
 class TimerecordsController < ApplicationController
-  before_action :authenticate_user!  	
+ 	
 
   def index
-    @timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
-    @user = User.find(params[:selecteduser])
+  	if current_user.admin?
+  		    	
+	else
+		params[:selecteduser] = current_user.id
+		
+	end
+		@timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
+    	@user = User.find(params[:selecteduser])
   end
 
 	def new				
@@ -30,17 +36,23 @@ class TimerecordsController < ApplicationController
 	end
 
 	def create
-
-		@timerecord = Timerecord.new(timerecord_params)
-		@timerecord.user_id = current_user.id
-		@timerecord.timein = $timenow
-		@timerecord.save
-
-		if @timerecord.save
-			redirect_to timerecords_path(:selecteduser => current_user.id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
-
+		time = Timerecord.currentuser(current_user.id).notimeout.exists?
+		if time
+			@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
+			redirect_to :action => 'timeout', :id => @exist_timerecord.id, :selecteduser => current_user.id	
 		else
-		render 'new'
+			@timenow = Time.zone.now 
+			@timerecord = Timerecord.new(timerecord_params)
+			@timerecord.user_id = current_user.id
+			@timerecord.timein = @timenow
+			@timerecord.save
+
+			if @timerecord.save
+				redirect_to timerecords_path(:selecteduser => current_user.id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
+
+			else
+			render 'new'
+			end
 		end
 	end
 
@@ -56,10 +68,15 @@ class TimerecordsController < ApplicationController
 		@timerecord = Timerecord.find(params[:id])
 		@task = Task.find(@timerecord.task_id)
 		
+	end	
+	def add_timerecord
+		@timerecord = Timerecord.new		
+		
+		
 	end
 	def update
 		@timerecord = Timerecord.find(params[:id])
-		if @timerecord.update(timerecord_params)
+		if @timerecord.update(timerecord1_params)
 			redirect_to timerecords_path(:selecteduser => @timerecord.user_id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 		else
 			render 'edit'
