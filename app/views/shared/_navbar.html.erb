@@ -18,11 +18,11 @@
 							<%= link_to 'TimeTracker', timerecords_path(:selecteduser => current_user.id, :weekstart => $beginning_of_this_week , :weekend => $end_of_this_week) %>
 						</li>
 						
-						<% if current_user.admin? %>
+					
 							<li>
-								<%= link_to 'Employees', users_path %>
+								<%= link_to 'Employees', users_path if current_user.admin? %>
 							</li>
-						<% end %>
+				
 
 							
 						
