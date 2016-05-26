@@ -16,6 +16,7 @@ class TimerecordDecorator < Draper::Decorator
 	def timed_out_at
 		object.timeout.strftime("%I:%M %p")
 	end
+	
 
 
 end

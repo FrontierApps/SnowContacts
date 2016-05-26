@@ -1,13 +1,13 @@
 class TimerecordsController < ApplicationController
- 	
+ 	layout 'loggedin'
 
   def index
   	if current_user.admin?
   		    	
-	else
-		params[:selecteduser] = current_user.id
+	  else
+		  params[:selecteduser] = current_user.id
 		
-	end
+	  end
 		@timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
     	@user = User.find(params[:selecteduser])
   end
@@ -26,29 +26,31 @@ class TimerecordsController < ApplicationController
 				flash[:notice] = "You were just timed out of job number "+ @exist_timerecord.jobnumber
 				@old_timerecord.update(timeout: Time.zone.now)
 				@timerecord = Timerecord.new	    
+				@timerecord.user_id = current_user.id 
 				@timerecord.jobnumber = params[:job_id]
+				@timerecord.timein = Time.zone.now
 			end
 
 		else 		  
-			@timerecord = Timerecord.new	    
+			@timerecord = Timerecord.new	  
+			@timerecord.user_id = current_user.id  
 			@timerecord.jobnumber = params[:job_id]
+			@timerecord.timein = Time.zone.now
 		end
 	end
 
 	def create
-		time = Timerecord.currentuser(current_user.id).notimeout.exists?
+		@user_id = params[:user_id]
+		time = Timerecord.currentuser(@user_id).notimeout.exists?
 		if time
 			@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
 			redirect_to :action => 'timeout', :id => @exist_timerecord.id, :selecteduser => current_user.id	
 		else
-			@timenow = Time.zone.now 
 			@timerecord = Timerecord.new(timerecord_params)
-			@timerecord.user_id = current_user.id
-			@timerecord.timein = @timenow
 			@timerecord.save
 
 			if @timerecord.save
-				redirect_to timerecords_path(:selecteduser => current_user.id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
+				redirect_to timerecords_path(:selecteduser => @timerecord.user_id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 
 			else
 			render 'new'
@@ -71,18 +73,24 @@ class TimerecordsController < ApplicationController
 	end	
 	def add_timerecord
 		@timerecord = Timerecord.new		
+		@timerecord.user_id = params[:user_id]
 		
 		
 	end
 	def update
 		@timerecord = Timerecord.find(params[:id])
-		if @timerecord.update(timerecord1_params)
+		if @timerecord.update(timerecord_params)
 			redirect_to timerecords_path(:selecteduser => @timerecord.user_id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 		else
 			render 'edit'
 		end
 	end
+	def destroy
+        @timerecord = Timerecord.find(params[:id])
+        @timerecord.destroy
 
+        redirect_to timerecords_path(:selecteduser => @timerecord.user_id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
+  end
 
 
 

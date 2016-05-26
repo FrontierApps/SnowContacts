@@ -1,5 +1,5 @@
 class LocationsController < ApplicationController
-  
+  layout 'loggedin'
   def index
     
     if params[:id]

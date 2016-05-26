@@ -1,5 +1,7 @@
 <div class="large">
     <%= form_for :timerecord, url: timerecords_path do |f| %>
+        <%= f.hidden_field :user_id %>
+        <%= f.hidden_field :timein %>
       
         <p style="font-size:3em">
             <%= f.text_field :jobnumber %>

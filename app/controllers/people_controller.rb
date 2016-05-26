@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
- 
+  layout 'loggedin'
   def index
     
     if params[:id]

@@ -23,6 +23,7 @@ class Timerecord < ActiveRecord::Base
 		((Time.diff(timein, @timeout, '%m'))[:diff].to_f / 60).round(2)
 	end
 	
+	
 	d=Time.zone.today
 	$timenow = Time.zone.now 
   	$beginning_of_this_week = d.at_beginning_of_week-1.day

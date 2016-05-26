@@ -1,9 +1,9 @@
 <div class="timerecords">
-<h1> Hours from <%= params[:weekstart] %> to <%= params[:weekend] %> for <%= @user.firstname %> <%= @user.lastname%>
+<h2> Hours from <%= params[:weekstart] %> to <%= params[:weekend] %> for <br> <%= @user.firstname %> <%= @user.lastname%>
 	<small> 
 		
 	</small>
-</h1>
+</h2>
 <div>
 <%= form_tag nil, :method => :get, :class => 'navbar-form navbar-left' do %>
 			<div class="form-group">
@@ -13,16 +13,17 @@
 			</div>
 			<button type="submit" class="btn btn-default">Submit</button>
 <% end %>
-<%= link_to "add record", '/timerecords/add_timerecord' %>
-<span>
-    
-</span>
+
 </div>
+
+<%= button_to "Insert Record", {:action => "add_timerecord", :user_id => @user.id}, { :form_class => 'navbar-form navbar-left' ,class: 'btn btn-success'} %> 
+
 <div class="table-responsive">
 
 
 <table class="table table-hover">
   <tr>
+    <th></th>
   	<th></th>
     <th>Job Number</th>
     <th>Date</th>       
@@ -32,6 +33,7 @@
   </tr>
   <%= render @timerecords %>
   <tr>
+    <td></td>
   	<td></td>
     <td></td> 
     <td></td>
