@@ -9,7 +9,7 @@ class TimerecordsController < ApplicationController
 		
 	  end
 		@timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
-    	@user = User.find(params[:selecteduser])
+		@user = User.find(params[:selecteduser])
   end
 
 	def new				

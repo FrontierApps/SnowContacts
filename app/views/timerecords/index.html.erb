@@ -22,8 +22,10 @@
 
 
 <table class="table table-hover">
+<% @timerecords.group_by(&:day).each do |day, timerecords| %>
+
   <tr>
-    <th></th>
+    <th><%= day %></th>
   	<th></th>
     <th>Job Number</th>
     <th>Date</th>       
@@ -31,7 +33,18 @@
     <th>Time Out</th>
     <th>Total</th>
   </tr>
-  <%= render @timerecords %>
+
+    <%= render timerecords %>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><%= timerecords.to_a.sum(&:timeTotal).round(2)%> Hours</td>
+ </tr>
+  <% end %>
   <tr>
     <td></td>
   	<td></td>
@@ -41,7 +54,9 @@
     <td></td>
     <td><%= @timerecords.to_a.sum(&:timeTotal).round(2)%> Hours</td>
  </tr>
+
  </table>
+ 
 </div>
 </div>   
 

@@ -1,8 +1,11 @@
 class Timerecord < ActiveRecord::Base
 
 	include Filterable
+
 	belongs_to :user
 	belongs_to :task
+
+	default_scope {order('timein ASC')}
 		
 	scope :notimeout, -> {where('timeout IS ?', nil)} 
 	scope :timethisweek, -> {where('timein > ?', d).all} 
@@ -23,7 +26,10 @@ class Timerecord < ActiveRecord::Base
 		((Time.diff(timein, @timeout, '%m'))[:diff].to_f / 60).round(2)
 	end
 	
-	
+	def day
+  		self.timein.strftime('%D')
+	end
+
 	d=Time.zone.today
 	$timenow = Time.zone.now 
   	$beginning_of_this_week = d.at_beginning_of_week-1.day
