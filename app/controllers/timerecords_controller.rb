@@ -13,26 +13,31 @@ class TimerecordsController < ApplicationController
 	end
 
 	def new	
+		if (params.has_key?(:selecteduser))
+			@user_id = params[:selecteduser]
+		else
+			@user_id = current_user.id
+		end
 		if(params.has_key?(:job_id))
-			time = Timerecord.currentuser(current_user.id).notimeout.exists?
+			time = Timerecord.currentuser(@user_id).notimeout.exists?
 			if time
-				@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
+				@exist_timerecord = Timerecord.currentuser(@user_id).notimeout.first
 				if (@exist_timerecord.jobnumber == params[:job_id])
-				redirect_to :action => 'edit', :id => @exist_timerecord.id, :selecteduser => current_user.id	
+				redirect_to :action => 'edit', :id => @exist_timerecord.id, :selecteduser => @user_id	
 
 				else
 				@old_timerecord = Timerecord.find_by(id: @exist_timerecord.id)
 				flash[:notice] = "You were just timed out of job number "+ @exist_timerecord.jobnumber
 				@old_timerecord.update(timeout: Time.zone.now)
 				@timerecord = Timerecord.new	    
-				@timerecord.user_id = current_user.id 
+				@timerecord.user_id = @user_id 
 				@timerecord.jobnumber = params[:job_id]
 				@timerecord.timein = Time.zone.now
 				end
 
 			else 		  
 				@timerecord = Timerecord.new	  
-				@timerecord.user_id = current_user.id  
+				@timerecord.user_id = @user_id  
 				@timerecord.jobnumber = params[:job_id]
 				@timerecord.timein = Time.zone.now
 			end
@@ -40,18 +45,14 @@ class TimerecordsController < ApplicationController
 			@timerecord = Timerecord.new		
 			@timerecord.user_id = params[:user_id]
 		end
-
-		time = Timerecord.currentuser(current_user.id).notimeout.exists?
-
-
 	end
 
 	def create
-		@user_id = params[:user_id]
+		@user_id = params[:timerecord][:user_id]
 		time = Timerecord.currentuser(@user_id).notimeout.exists?
-		if time
-			@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
-			redirect_to :action => 'timeout', :id => @exist_timerecord.id, :selecteduser => current_user.id	
+		if time && params[:addrecord] != "1"
+			@exist_timerecord = Timerecord.currentuser(@user_id).notimeout.first
+			redirect_to :action => 'edit', :id => @exist_timerecord.id, :selecteduser => @user_id	
 		else
 			@timerecord = Timerecord.new(timerecord_params)
 			@timerecord.save
@@ -60,7 +61,9 @@ class TimerecordsController < ApplicationController
 				redirect_to timerecords_path(:selecteduser => @timerecord.user_id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 
 			else
+			flash[:notice] = "Something didn't work"
 			render 'new'
+
 			end
 		end
 	end
@@ -75,7 +78,10 @@ class TimerecordsController < ApplicationController
 	def edit
 
 		@timerecord = Timerecord.find(params[:id])
+		if @timerecord.timeout
+		else
 		@timerecord.timeout = Time.zone.now
+		end
 		@task = Task.find(@timerecord.task_id)
 		
 	end	
@@ -90,6 +96,7 @@ class TimerecordsController < ApplicationController
 		if @timerecord.update(timerecord_params)
 			redirect_to timerecords_path(:selecteduser => @timerecord.user_id, :weekstart => $beginning_of_this_week, :weekend => $end_of_this_week)
 		else
+			flash[:notice] = "Something didn't work"
 			render 'edit'
 		end
 	end

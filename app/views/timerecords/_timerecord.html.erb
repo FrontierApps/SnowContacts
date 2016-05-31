@@ -1,5 +1,6 @@
 
  <tr>
+
  	<td><%= link_to '', edit_timerecord_path(timerecord.id, :selecteduser => params[:selecteduser], :weekstart => params[:weekstart], :weekend => params[:weekend]), :class => 'glyphicon glyphicon-pencil' %></td>
  	<td>
  	<%if current_user.admin? %>
@@ -11,7 +12,6 @@
   	<%end%>
   	</td>
     <td><%= timerecord.jobnumber %></td> 
-    <td><%= timerecord.timein.strftime("%m-%d") %></td>
     <td><%= timerecord.timein.strftime("%I:%M %p") %></td>
     <td><%= timerecord.timed_out_status %></td>
     <td><%= timerecord.timeTotal%></td>

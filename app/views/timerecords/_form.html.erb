@@ -1,29 +1,28 @@
 
-<%= form_for @timerecord do |f| %>  <p>
+<%= form_for @timerecord do |f| %>  
+<div>
 
    <%= f.hidden_field :user_id %>
-      
-    <p>
+   <%= hidden_field_tag(:addrecord, value = params[:addrecord]) %>
+   
+    <div>
       <%= f.label :jobnumber %><br>
       <%= f.text_field :jobnumber %>
-    </p>
-    <p>
+    </div>
+    <div>
     <%= f.datetime_local_field :timein, :step => "1"%>
-    </p>
-    <p>
+    </div>
+    <div>
     <%= f.datetime_local_field :timeout, :step => "1" %>
-    </p>
+    </div>
     
-    <p class="big_drop"> 
+    <div class="big_drop"> 
     <%= f.collection_select(:task_id, Task.order(:taskname), :id, :taskname, include_blank: false)%>
-    </p>
+    </div>
   
-  </p>
-    
- 
-  <p>
-     
+</div>
+<div>     
     <%= f.submit "Submit", :class => "btn btn-success big_button" %>
+</div>
 
-  </p>
 <% end %>
