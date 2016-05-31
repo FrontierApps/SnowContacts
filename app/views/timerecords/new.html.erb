@@ -1,20 +1,3 @@
 <div class="large">
-    <%= form_for :timerecord, url: timerecords_path do |f| %>
-        <%= f.hidden_field :user_id %>
-        <%= f.hidden_field :timein %>
-      
-        <p style="font-size:3em">
-            <%= f.text_field :jobnumber %>
-        </p>
-                
-        <p class="big_drop"> 
-        <%= f.collection_select(:task_id, Task.order(:taskname), :id, :taskname, include_blank: false)%>
-        </p>
-          
-       
-        <p>
-          <%= f.submit "Time In", :class => "btn btn-success big_button"%>	
-        </p>
-
-    <% end %>
+<%= render 'form' %>
 </div>

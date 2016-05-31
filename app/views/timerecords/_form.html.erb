@@ -1,5 +1,5 @@
 
-<%= form_for :timerecord, method: :post, url: timerecords_path do |f| %>  <p>
+<%= form_for @timerecord do |f| %>  <p>
 
    <%= f.hidden_field :user_id %>
       
@@ -8,10 +8,10 @@
       <%= f.text_field :jobnumber %>
     </p>
     <p>
-    <%= f.datetime_local_field :timein %>
+    <%= f.datetime_local_field :timein, :step => "1"%>
     </p>
     <p>
-    <%= f.datetime_local_field :timeout %>
+    <%= f.datetime_local_field :timeout, :step => "1" %>
     </p>
     
     <p class="big_drop"> 
@@ -22,6 +22,8 @@
     
  
   <p>
-    <%= f.submit "submit", :class => "btn btn-warning big_button"%>	
+     
+    <%= f.submit "Submit", :class => "btn btn-success big_button" %>
+
   </p>
 <% end %>

@@ -1,27 +1,26 @@
 class TimerecordsController < ApplicationController
  	layout 'loggedin'
 
-  def index
-  	if current_user.admin?
-  		    	
-	  else
-		  params[:selecteduser] = current_user.id
-		
-	  end
-		@timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
-		@user = User.find(params[:selecteduser])
-  end
+	def index
+		if current_user.admin?
+			
+		else
+			params[:selecteduser] = current_user.id
 
-	def new				
-		time = Timerecord.currentuser(current_user.id).notimeout.exists?
+		end
+			@timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
+			@user = User.find(params[:selecteduser])
+	end
 
-		if time
-			@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
+	def new	
+		if(params.has_key?(:job_id))
+			time = Timerecord.currentuser(current_user.id).notimeout.exists?
+			if time
+				@exist_timerecord = Timerecord.currentuser(current_user.id).notimeout.first
+				if (@exist_timerecord.jobnumber == params[:job_id])
+				redirect_to :action => 'edit', :id => @exist_timerecord.id, :selecteduser => current_user.id	
 
-			if (@exist_timerecord.jobnumber == params[:job_id])
-				redirect_to :action => 'timeout', :id => @exist_timerecord.id, :selecteduser => current_user.id	
-
-			else
+				else
 				@old_timerecord = Timerecord.find_by(id: @exist_timerecord.id)
 				flash[:notice] = "You were just timed out of job number "+ @exist_timerecord.jobnumber
 				@old_timerecord.update(timeout: Time.zone.now)
@@ -29,14 +28,22 @@ class TimerecordsController < ApplicationController
 				@timerecord.user_id = current_user.id 
 				@timerecord.jobnumber = params[:job_id]
 				@timerecord.timein = Time.zone.now
-			end
+				end
 
-		else 		  
-			@timerecord = Timerecord.new	  
-			@timerecord.user_id = current_user.id  
-			@timerecord.jobnumber = params[:job_id]
-			@timerecord.timein = Time.zone.now
+			else 		  
+				@timerecord = Timerecord.new	  
+				@timerecord.user_id = current_user.id  
+				@timerecord.jobnumber = params[:job_id]
+				@timerecord.timein = Time.zone.now
+			end
+		else
+			@timerecord = Timerecord.new		
+			@timerecord.user_id = params[:user_id]
 		end
+
+		time = Timerecord.currentuser(current_user.id).notimeout.exists?
+
+
 	end
 
 	def create
@@ -68,6 +75,7 @@ class TimerecordsController < ApplicationController
 	def edit
 
 		@timerecord = Timerecord.find(params[:id])
+		@timerecord.timeout = Time.zone.now
 		@task = Task.find(@timerecord.task_id)
 		
 	end	

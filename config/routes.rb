@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   resources :timerecords
   
   get 'timerecords/timeout/:id' => 'timerecords#timeout'
-  post 'timerecords/add_timerecord' => 'timerecords#add_timerecord'
-
 
   
   resources :contacts do

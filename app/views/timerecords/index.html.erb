@@ -15,9 +15,9 @@
 <% end %>
 
 </div>
-
-<%= button_to "Insert Record", {:action => "add_timerecord", :user_id => @user.id}, { :form_class => 'navbar-form navbar-left' ,class: 'btn btn-success'} %> 
-
+<div>
+<%= button_to 'Insert Record', new_timerecord_path,  {:method => "get", :user_id => @user.id, :form_class => 'form-block' ,class: 'btn btn-primary'} %>
+</div>
 <div class="table-responsive">
 
 
