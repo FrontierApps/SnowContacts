@@ -53,8 +53,6 @@
   </div>
   <div>
   <%= link_to 'Insert missing record', new_timerecord_path(:user_id => @user.id, :addrecord => "1"), {class: 'btn btn-primary'} %>
-  <%= link_to 'Printable Receipt (PDF)', timerecords_path(@timerecord,:notes, :weekstart => params[:weekstart], :weekend => params[:weekend], :selecteduser => @user.id, format: 'pdf'), {class: 'btn btn-primary'} %>
-  <%= text_area_tag(:notes) %>
   </div>
 </div>   
 
