@@ -10,6 +10,15 @@ class TimerecordsController < ApplicationController
 		end
 			@timerecords = Timerecord.filter(params.slice(:selecteduser, :weekstart, :weekend)).decorate
 			@user = User.find(params[:selecteduser])
+			respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'file_name',
+        :template => 'timerecords/index.pdf.erb',
+        :layout => 'pdf.html.erb',
+        :show_as_html => params[:debug].present?
+      end
+    end
 	end
 
 	def new	
