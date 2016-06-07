@@ -38,7 +38,8 @@
     <div> <strong>Contact:</strong><%=@locations.onsiteContactName%> </div>
     
     <div>
-      <span><strong><%= link_to "Current Signs", sign_path(:id => @contact.id, :loc => @locations.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %></strong></span>
+      <span><strong>Current Signs</strong></span>
+      <%= render @locations.signs%>
     </div>
     <div>
       <%= link_to 'Add a sign to this location', new_sign_path(:id => @contact.id, :loc => @locations.id), {:remote => true, 'data-toggle' => "modal", 'data-target' => '#myContactForm'} %>

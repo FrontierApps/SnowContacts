@@ -3,6 +3,7 @@ class CreateJobnumbers < ActiveRecord::Migration
     create_table :jobnumbers do |t|
      t.string  "JobNumber",    limit: 45
      t.belongs_to :contacts
+     t.belongs_to :signs
      t.date    "DateStart"
      t.boolean "Complete",                 default: false
      t.string  "projectName",  limit: 45

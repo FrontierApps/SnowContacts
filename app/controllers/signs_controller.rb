@@ -11,7 +11,8 @@ class SignsController < ApplicationController
 	end
 	def show
 		
-		@sign= Sign.where(contact_id: params[:id], location_id: params[:loc])
+		@sign= Sign.find(params[:id])
+
 	end
 
 	def new

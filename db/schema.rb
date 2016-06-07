@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20160425184829) do
   create_table "jobnumbers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "JobNumber",   limit: 45
     t.integer  "contacts_id"
+    t.integer  "signs_id"
     t.date     "DateStart"
     t.boolean  "Complete",                default: false
     t.string   "projectName", limit: 45
@@ -128,13 +129,13 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.index ["location_id"], name: "index_signs_on_location_id", using: :btree
   end
 
-  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string   "taskname"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "timerecords", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "timerecords", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string   "jobnumber"
     t.integer  "user_id"
     t.integer  "task_id"
