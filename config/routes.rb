@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :people
   end
 
+  resources :locations do
+    resources :signs
+  end
+
   resources :signs do
     resources :jobnumbers
     resources :attributes
