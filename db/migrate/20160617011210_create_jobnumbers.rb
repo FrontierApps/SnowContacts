@@ -1,9 +1,9 @@
-class CreateJobnumbers < ActiveRecord::Migration
+class CreateJobnumbers < ActiveRecord::Migration[5.0]
   def change
     create_table :jobnumbers do |t|
      t.string  "JobNumber",    limit: 45
      t.belongs_to :contacts
-     t.belongs_to :signs
+     t.belongs_to :sign
      t.date    "DateStart"
      t.boolean "Complete",                 default: false
      t.string  "projectName",  limit: 45

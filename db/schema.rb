@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160425184829) do
+ActiveRecord::Schema.define(version: 20160617011210) do
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string   "FirstName",         limit: 50
@@ -61,8 +61,10 @@ ActiveRecord::Schema.define(version: 20160425184829) do
     t.string   "QuoteRef",    limit: 45
     t.date     "DueDate"
     t.string   "notes",       limit: 400
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["contacts_id"], name: "index_jobnumbers_on_contacts_id", using: :btree
+    t.index ["signs_id"], name: "index_jobnumbers_on_signs_id", using: :btree
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
