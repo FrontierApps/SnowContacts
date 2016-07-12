@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20160617011210) do
   create_table "jobnumbers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "JobNumber",   limit: 45
     t.integer  "contacts_id"
-    t.integer  "signs_id"
+    t.integer  "sign_id"
     t.date     "DateStart"
     t.boolean  "Complete",                default: false
     t.string   "projectName", limit: 45
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20160617011210) do
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
     t.index ["contacts_id"], name: "index_jobnumbers_on_contacts_id", using: :btree
-    t.index ["signs_id"], name: "index_jobnumbers_on_signs_id", using: :btree
+    t.index ["sign_id"], name: "index_jobnumbers_on_sign_id", using: :btree
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
